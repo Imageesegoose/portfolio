@@ -1,0 +1,162 @@
+# Workflow: create a PR that updates index.html and assets/css/styles.css
+name: Site automation (create PR)
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: 'Commit message for the automated update'
+        required: false
+        default: 'chore: automated site updates (font + logo)'
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ensure folders exist
+        run: mkdir -p assets/css assets/images
+
+      - name: Replace index.html (safe template)
+        run: |
+          cat > index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <title>Your Name — Art Direction & Photography</title>
+            <meta name="description" content="Portfolio of an art director with emphasis on photography." />
+            <!-- Google Font: Major Mono Display (loaded before CSS) -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+            <!-- site CSS -->
+            <link rel="stylesheet" href="assets/css/styles.css" />
+          </head>
+          <body>
+            <header class="site-header">
+              <div class="wrap header-inner">
+                <a class="brand" href="/">
+                  <img src="assets/images/logo.svg" alt="Logo" class="logo">
+                  <span class="site-title">Your Name</span>
+                </a>
+                <nav class="site-nav">
+                  <a href="#portfolio">Portfolio</a>
+                  <a href="#about">About</a>
+                  <a href="#contact">Contact</a>
+                </nav>
+              </div>
+            </header>
+
+            <main>
+              <section class="hero wrap">
+                <h2>Art Direction &amp; Photography</h2>
+                <p class="lead">Minimal, editorial-driven imagery and concept-led creative direction.</p>
+              </section>
+
+              <section id="portfolio" class="wrap portfolio">
+                <h3>Selected Work</h3>
+                <div class="gallery" id="gallery">
+                  <!-- placeholder items (replace with your images) -->
+                  <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
+                    <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
+                  </a>
+                  <a href="assets/images/placeholder2.svg" data-caption="Project — Editorial Series" class="gallery-item">
+                    <img src="assets/images/placeholder2.svg" alt="Project — Editorial Series" loading="lazy">
+                  </a>
+                </div>
+              </section>
+
+              <section id="about" class="wrap about">
+                <h3>About</h3>
+                <p class="bio">Your short bio goes here.</p>
+              </section>
+
+              <section id="contact" class="wrap contact">
+                <h3>Contact</h3>
+                <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+              </section>
+            </main>
+
+            <footer class="site-footer wrap">
+              <small>© <span id="year"></span> Your Name</small>
+            </footer>
+
+            <script src="assets/js/main.js"></script>
+          </body>
+          </html>
+          HTML
+
+      - name: Replace assets/css/styles.css
+        run: |
+          cat > assets/css/styles.css <<'CSS'
+          :root{
+            --bg:#fbf9f7;
+            --fg:#111;
+            --muted:#777;
+            --accent:#111;
+            --max-width:1200px;
+            --gap:18px;
+            --display-font: 'Major Mono Display', monospace;
+            --body-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+          }
+          *{box-sizing:border-box}
+          html,body{height:100%}
+          body{
+            margin:0;
+            background:var(--bg);
+            color:var(--fg);
+            line-height:1.45;
+            font-family: var(--body-font);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+          }
+          .wrap{max-width:var(--max-width);margin:0 auto;padding:28px;}
+          .header-inner{display:flex;align-items:center;justify-content:space-between;}
+          .brand{display:flex;align-items:center;gap:18px;text-decoration:none;color:inherit;}
+          .logo{width:260px;height:auto;display:block;filter:none;}
+          .site-title{margin:0;font-weight:400;font-size:18px;color:var(--fg);font-family:var(--display-font);letter-spacing:0.06em;}
+          .site-nav{display:flex;gap:18px;align-items:center;}
+          .site-nav a{color:var(--muted);text-decoration:none;font-weight:400;font-family:var(--display-font);letter-spacing:0.08em;font-size:14px;}
+          .hero{text-align:center;padding:56px 0;}
+          .hero h2{margin:0;font-family:var(--display-font);font-size:36px;letter-spacing:0.06em;}
+          .hero .lead{color:var(--muted);max-width:60ch;margin:12px auto 0;}
+          .portfolio h3,.about h3,.contact h3{margin-top:6px;margin-bottom:12px;font-size:20px;font-family:var(--display-font);letter-spacing:0.06em;}
+          .gallery{column-gap:var(--gap);column-count:3;}
+          .gallery-item{display:inline-block;width:100%;margin:0 0 var(--gap);cursor:pointer;text-decoration:none;color:inherit;break-inside:avoid;}
+          .gallery-item img{width:100%;height:auto;display:block;border-radius:4px;box-shadow:0 6px 18px rgba(10,10,10,0.06);}
+          @media (max-width:1000px){ .gallery{column-count:2} }
+          @media (max-width:640px){ .gallery{column-count:1} .site-nav{display:none} .hero{padding:28px 0} }
+          .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:24px;}
+          .lightbox[aria-hidden="false"]{display:flex;}
+          .lightbox-image{max-width:90%;max-height:80%;object-fit:contain;border-radius:4px;}
+          .lightbox-caption{color:#eee;margin-top:12px;text-align:center;}
+          .site-footer{text-align:center;padding:40px 0;color:var(--muted);border-top:1px solid rgba(0,0,0,0.06);}
+          .bio{max-width:68ch;color:var(--muted);}
+          CSS
+
+      - name: Commit changes and push branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b copilot/site-update-${{ github.run_id }}
+          git add index.html assets/css/styles.css
+          git commit -m "${{ github.event.inputs.commit_message }}"
+          git push --set-upstream origin HEAD
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "${{ github.event.inputs.commit_message }}"
+          title: "Automated site updates: font + logo"
+          body: "This PR updates index.html and styles.css to load Major Mono Display and ensure logo.svg is referenced. Please review and merge to apply to GitHub Pages."
+          base: main
+          head: copilot/site-update-${{ github.run_id }}
