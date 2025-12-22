@@ -36,31 +36,3 @@ How to use / edit
 <a href="assets/images/your-image.jpg" data-caption="Project title" class="gallery-item">
   <img src="assets/images/your-image.jpg" alt="Project title" loading="lazy">
 </a>
-```
-
-   - For large galleries, consider adding many `<a>` items or generating the list from a small JSON file + JS.
-
-4. Image recommendations
-   - Export web-friendly sizes: for hero/large work use ~1400–2400px width, for thumbnails 800–1200px width.
-   - Use modern formats (WebP) for better perf. You can keep fallback JPG/PNG if needed.
-   - Compress images (jpegoptim, mozjpeg, or an image compressor).
-   - Add descriptive `alt` text and `data-caption` so lightbox captions make sense.
-
-5. Change colors / fonts
-   - Edit CSS variables at top of `assets/css/styles.css` (`:root { --bg: ...; --fg: ... }`).
-
-6. Test locally
-   - Simple Python server:
-     - Python 3: `python -m http.server 8000` then open `http://localhost:8000`.
-   - Or use `npx serve` for a quick static server.
-
-7. Deploy on GitHub Pages
-   - Commit files to your repository (branch `main` recommended).
-   - On GitHub: Settings → Pages → Build and deployment → Branch: select `main` (root) and save.
-   - The site will be published at `https://<your-username>.github.io/<repo>/` (or custom domain).
-   - If you want images hosted in another repo, use raw URLs: `https://raw.githubusercontent.com/{owner}/{repo}/{branch}/path/to/image.jpg`.
-
-Notes & tips
-- For many photos consider using responsive `srcset` and `sizes` attributes to serve appropriately sized images per screen width.
-- If you later want CMS-like editing, you can pair this with Netlify CMS, Forestry, or a headless CMS and still host on GitHub Pages.
-- I can add optional features: pagination, lazy-loading intersection observer (for better performance), or a JSON-driven gallery so you don't edit HTML directly.
