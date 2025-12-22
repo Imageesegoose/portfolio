@@ -1,14 +1,15 @@
 :root{
   /* Slightly off-white background, deep black foreground */
-  --bg: #fbf9f7; /* replaceable to taste */
+  --bg: #fbf9f7;
   --fg:#111;
   --muted:#777;
   --accent:#111;
   --max-width:1200px;
   --gap:18px;
-  /* Keep Inter as the body font for readability; Major Mono Display used for headings/title/nav */
-  --body-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  /* Major Mono Display for headings/title/nav */
   --display-font: 'Major Mono Display', monospace;
+  /* Use a readable system stack for body text; if you want Inter too, add it via Google Fonts */
+  --body-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -34,18 +35,16 @@ body{
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:18px;
   text-decoration:none;
   color:inherit;
 }
 .logo{
-  width:44px;
+  width:260px; /* adjust for your logo size */
   height:auto;
   display:block;
-  /* ensure logo displays as provided (black) */
-  filter:none;
+  filter:none; /* ensure SVG is not recolored */
 }
-/* Use Major Mono Display for site title and nav */
 .site-title{
   margin:0;
   font-weight:400;
