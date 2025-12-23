@@ -8,7 +8,7 @@ This is a minimal static portfolio website designed for photography and art dire
 - `about.html` - About page
 - `assets/css/styles.css` - All styling (uses CSS variables for theming)
 - `assets/js/main.js` - Lightbox and interactive functionality
-- `assets/images/` - All image assets (SVG logos, placeholder images)
+- `assets/images/` - All image assets (SVG logos, placeholder images, adventure photos in subdirectories)
 - `.github/workflows/` - GitHub Actions for site automation
 
 ## Code Style and Conventions
@@ -53,8 +53,8 @@ This is a minimal static portfolio website designed for photography and art dire
 ## File Organization
 - Keep all CSS in `assets/css/styles.css` (single file)
 - Keep all JavaScript in `assets/js/main.js` (single file)
-- Store all images in `assets/images/`
-- Use consistent naming: lowercase with hyphens (e.g., `placeholder-1.svg`)
+- Store all images in `assets/images/` (or subdirectories like `assets/images/adventure/`)
+- Use consistent naming: lowercase with numbers (e.g., `placeholder1.svg`, `adventure-00001.jpg`)
 
 ## Testing and Validation
 - Test locally using Python's simple HTTP server: `python -m http.server 8000`
@@ -91,10 +91,16 @@ This is a minimal static portfolio website designed for photography and art dire
 ## Common Tasks
 
 ### Adding New Gallery Images
-Add new `<a>` elements inside the `.gallery` div:
+Add new `<a>` elements inside the `.gallery` div. Use SVG placeholders or actual photos:
 ```html
-<a href="assets/images/your-image.jpg" data-caption="Project title" class="gallery-item">
-  <img src="assets/images/your-image.jpg" alt="Project title" loading="lazy">
+<!-- Example with SVG placeholder -->
+<a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
+  <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
+</a>
+
+<!-- Example with actual photo from subdirectory -->
+<a href="assets/images/adventure/adventure-00001.jpg" data-caption="Adventure Series" class="gallery-item">
+  <img src="assets/images/adventure/adventure-00001.jpg" alt="Adventure Series" loading="lazy">
 </a>
 ```
 
