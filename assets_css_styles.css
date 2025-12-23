@@ -1,4 +1,4 @@
-:root{
+/* TEMP TEST: force Major Mono Display on headings to confirm font loads */ .site-title, .site-nav a, .hero h2, .portfolio h3, .about h3, .contact h3 { font-family: 'Major Mono Display', monospace !important; } :root{
   /* Slightly off-white background, deep black foreground */
   --bg: #fbf9f7;
   --fg:#111;
