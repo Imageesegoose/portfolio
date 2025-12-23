@@ -1,0 +1,159 @@
+/* TEMP TEST: force Major Mono Display on headings to confirm font loads */ .site-title, .site-nav a, .hero h2, .portfolio h3, .about h3, .contact h3 { font-family: 'Major Mono Display', monospace !important; } :root{
+  /* Slightly off-white background, deep black foreground */
+  --bg: #fbf9f7;
+  --fg:#111;
+  --muted:#777;
+  --accent:#111;
+  --max-width:1200px;
+  --gap:18px;
+  /* Major Mono Display for headings/title/nav */
+  --display-font: 'Major Mono Display', monospace;
+  /* Use a readable system stack for body text; if you want Inter too, add it via Google Fonts */
+  --body-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  line-height:1.45;
+  font-family: var(--body-font);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.wrap{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:28px;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  text-decoration:none;
+  color:inherit;
+}
+.logo{
+  width:260px; /* adjust for your logo size */
+  height:auto;
+  display:block;
+  filter:none; /* ensure SVG is not recolored */
+}
+.site-title{
+  margin:0;
+  font-weight:400;
+  font-size:18px;
+  color:var(--fg);
+  font-family: var(--display-font);
+  letter-spacing: 0.06em;
+}
+.site-nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+.site-nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:400;
+  font-family: var(--display-font);
+  letter-spacing: 0.08em;
+  font-size:14px;
+}
+.hero{
+  text-align:center;
+  padding:56px 0;
+}
+/* Hero heading uses Major Mono Display */
+.hero h2{
+  margin:0;
+  font-family: var(--display-font);
+  font-size:36px;
+  letter-spacing: 0.06em;
+}
+.hero .lead{
+  color:var(--muted);
+  max-width:60ch;
+  margin:12px auto 0;
+}
+/* Section headings use Major Mono Display */
+.portfolio h3, .about h3, .contact h3{
+  margin-top:6px;
+  margin-bottom:12px;
+  font-size:20px;
+  font-family: var(--display-font);
+  letter-spacing: 0.06em;
+}
+.gallery{
+  column-gap:var(--gap);
+  column-count:3;
+}
+.gallery-item{
+  display:inline-block;
+  width:100%;
+  margin:0 0 var(--gap);
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  break-inside:avoid;
+}
+.gallery-item img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:4px;
+  box-shadow:0 6px 18px rgba(10,10,10,0.06);
+}
+@media (max-width:1000px){ .gallery{column-count:2} }
+@media (max-width:640px){ .gallery{column-count:1} .site-nav{display:none} .hero{padding:28px 0} }
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.85);
+  z-index:9999;
+  padding:24px;
+}
+.lightbox[aria-hidden="false"]{ display:flex; }
+.lightbox-image{
+  max-width:90%;
+  max-height:80%;
+  object-fit:contain;
+  border-radius:4px;
+}
+.lightbox-caption{
+  color:#eee;
+  margin-top:12px;
+  text-align:center;
+}
+.lightbox-close, .lightbox-prev, .lightbox-next{
+  position:fixed;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:36px;
+  cursor:pointer;
+  padding:12px;
+}
+.lightbox-close{ right:18px; top:18px }
+.lightbox-prev{ left:18px; top:50%; transform:translateY(-50%) }
+.lightbox-next{ right:18px; top:50%; transform:translateY(-50%) }
+
+.site-footer{
+  text-align:center;
+  padding:40px 0;
+  color:var(--muted);
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+
+/* Quick tweaks for captions / bio */
+.bio{ max-width:68ch; color:var(--muted); }
