@@ -1,0 +1,24 @@
+SAMPLE OUTPUT (this is placeholder content to show how results will look)
+Run: bash diagnostics/check_references.sh
+
+=== DIAGNOSTIC SCAN: references to assets/images/adventure ===
+./index.html:120:<a href="assets/images/adventure/adventure-00001.jpg" data-caption="Adventure — Image 1" class="gallery-item">
+./adventure.html:45:<img src="assets/images/adventure/adventure-00003.JPG" alt="Adventure image 3" loading="lazy">
+
+=== LISTING files in assets/images/adventure (case-sensitive) ===
+-rw-r--r--  1 you  staff  69414 Dec 23  2025 adventure-00001.jpeg
+-rw-r--r--  1 you  staff 824906 Dec 23  2025 adventure-00002.jpg
+-rw-r--r--  1 you  staff 916158 Dec 23  2025 adventure-00003.JPG
+...
+
+=== REFERENCES to assets/js/main.js and assets/js/lightbox.js ===
+References to assets/js/main.js:
+./index.html:200:<script src="assets/js/main.js"></script>
+
+References to assets/js/lightbox.js:
+(no matches)
+
+INTERPRETATION:
+- index.html references adventure-00001.jpg but the listing shows adventure-00001.jpeg → mismatch, update index.html to use .jpeg
+- index.html references assets/js/main.js which exists (ok) OR does not exist (if missing, you'll see a 404 in the browser console)
+- After running the script locally, follow the recommended next steps in DIAGNOSTICS.md
