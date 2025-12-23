@@ -1,89 +1,156 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>cordacreative</title>
-  <meta name="description" content="Portfolio of an art director with emphasis on photography." />
-  <!-- Google Font: Major Mono Display (loaded before CSS) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
-  <!-- site CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio — Imageesegoose</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="index.html">
-        <!-- Use the uploaded SVG logo -->
-        <img src="assets/images/logo.svg" alt="Logo" class="logo">
-        <span class="site-title">Your Name</span>
-      </a>
-      <nav class="site-nav">
-        <a href="index.html#portfolio">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="index.html#contact">Contact</a>
+    <div class="wrap">
+      <a class="logo" href="index.html">Imageesegoose</a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="adventure.html">Adventure</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero wrap">
-      <h2>Art Direction &amp; Photography</h2>
-      <p class="lead">Minimal, editorial-driven imagery and concept-led creative direction.</p>
-    </section>
-
-    <section id="portfolio" class="wrap portfolio">
-      <h3>Selected Work</h3>
-      <div class="gallery" id="gallery">
-        <!-- Replace these with your images in assets/images/ or use raw GitHub URLs -->
-        <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
-          <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder2.svg" data-caption="Project — Editorial Series" class="gallery-item">
-          <img src="assets/images/placeholder2.svg" alt="Project — Editorial Series" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder3.svg" data-caption="Project — Campaign" class="gallery-item">
-          <img src="assets/images/placeholder3.svg" alt="Project — Campaign" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder4.svg" data-caption="Project — Landscape" class="gallery-item">
-          <img src="assets/images/placeholder4.svg" alt="Project — Landscape" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder5.svg" data-caption="Project — Still Life" class="gallery-item">
-          <img src="assets/images/placeholder5.svg" alt="Project — Still Life" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder6.svg" data-caption="Project — Concept Series" class="gallery-item">
-          <img src="assets/images/placeholder6.svg" alt="Project — Concept Series" loading="lazy">
-        </a>
+    <!-- Portfolio section (preserved) -->
+    <section id="portfolio" class="portfolio">
+      <div class="wrap">
+        <h1>Selected Work</h1>
+        <p>Welcome to my portfolio. Below are some featured projects and images.</p>
+        <!-- Example portfolio items (placeholder) -->
+        <div class="cards">
+          <article class="card">
+            <img src="assets/images/sample-01.jpg" alt="Sample 1">
+            <h3>Project One</h3>
+          </article>
+          <article class="card">
+            <img src="assets/images/sample-02.jpg" alt="Sample 2">
+            <h3>Project Two</h3>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="wrap about">
-      <h3>About</h3>
-      <p><a href="about.html">Read more about me →</a></p>
+    <!-- Adventure gallery section (added) -->
+    <section id="adventure" class="gallery">
+      <div class="wrap">
+        <h2>Adventure Gallery</h2>
+        <p>A selection of adventure photos. Click an image to open the lightbox.</p>
+
+        <div class="gallery-grid">
+          <!-- 28 images -->
+          <!-- Images are located at assets/images/adventure/adventure-00001.jpg ... adventure-00028.jpg -->
+          
+          <a href="assets/images/adventure/adventure-00001.jpg" data-lightbox="adventure" data-title="Adventure 1">
+            <img src="assets/images/adventure/adventure-00001.jpg" alt="Adventure 1">
+          </a>
+          <a href="assets/images/adventure/adventure-00002.jpg" data-lightbox="adventure" data-title="Adventure 2">
+            <img src="assets/images/adventure/adventure-00002.jpg" alt="Adventure 2">
+          </a>
+          <a href="assets/images/adventure/adventure-00003.jpg" data-lightbox="adventure" data-title="Adventure 3">
+            <img src="assets/images/adventure/adventure-00003.jpg" alt="Adventure 3">
+          </a>
+          <a href="assets/images/adventure/adventure-00004.jpg" data-lightbox="adventure" data-title="Adventure 4">
+            <img src="assets/images/adventure/adventure-00004.jpg" alt="Adventure 4">
+          </a>
+          <a href="assets/images/adventure/adventure-00005.jpg" data-lightbox="adventure" data-title="Adventure 5">
+            <img src="assets/images/adventure/adventure-00005.jpg" alt="Adventure 5">
+          </a>
+          <a href="assets/images/adventure/adventure-00006.jpg" data-lightbox="adventure" data-title="Adventure 6">
+            <img src="assets/images/adventure/adventure-00006.jpg" alt="Adventure 6">
+          </a>
+          <a href="assets/images/adventure/adventure-00007.jpg" data-lightbox="adventure" data-title="Adventure 7">
+            <img src="assets/images/adventure/adventure-00007.jpg" alt="Adventure 7">
+          </a>
+          <a href="assets/images/adventure/adventure-00008.jpg" data-lightbox="adventure" data-title="Adventure 8">
+            <img src="assets/images/adventure/adventure-00008.jpg" alt="Adventure 8">
+          </a>
+          <a href="assets/images/adventure/adventure-00009.jpg" data-lightbox="adventure" data-title="Adventure 9">
+            <img src="assets/images/adventure/adventure-00009.jpg" alt="Adventure 9">
+          </a>
+          <a href="assets/images/adventure/adventure-00010.jpg" data-lightbox="adventure" data-title="Adventure 10">
+            <img src="assets/images/adventure/adventure-00010.jpg" alt="Adventure 10">
+          </a>
+          <a href="assets/images/adventure/adventure-00011.jpg" data-lightbox="adventure" data-title="Adventure 11">
+            <img src="assets/images/adventure/adventure-00011.jpg" alt="Adventure 11">
+          </a>
+          <a href="assets/images/adventure/adventure-00012.jpg" data-lightbox="adventure" data-title="Adventure 12">
+            <img src="assets/images/adventure/adventure-00012.jpg" alt="Adventure 12">
+          </a>
+          <a href="assets/images/adventure/adventure-00013.jpg" data-lightbox="adventure" data-title="Adventure 13">
+            <img src="assets/images/adventure/adventure-00013.jpg" alt="Adventure 13">
+          </a>
+          <a href="assets/images/adventure/adventure-00014.jpg" data-lightbox="adventure" data-title="Adventure 14">
+            <img src="assets/images/adventure/adventure-00014.jpg" alt="Adventure 14">
+          </a>
+          <a href="assets/images/adventure/adventure-00015.jpg" data-lightbox="adventure" data-title="Adventure 15">
+            <img src="assets/images/adventure/adventure-00015.jpg" alt="Adventure 15">
+          </a>
+          <a href="assets/images/adventure/adventure-00016.jpg" data-lightbox="adventure" data-title="Adventure 16">
+            <img src="assets/images/adventure/adventure-00016.jpg" alt="Adventure 16">
+          </a>
+          <a href="assets/images/adventure/adventure-00017.jpg" data-lightbox="adventure" data-title="Adventure 17">
+            <img src="assets/images/adventure/adventure-00017.jpg" alt="Adventure 17">
+          </a>
+          <a href="assets/images/adventure/adventure-00018.jpg" data-lightbox="adventure" data-title="Adventure 18">
+            <img src="assets/images/adventure/adventure-00018.jpg" alt="Adventure 18">
+          </a>
+          <a href="assets/images/adventure/adventure-00019.jpg" data-lightbox="adventure" data-title="Adventure 19">
+            <img src="assets/images/adventure/adventure-00019.jpg" alt="Adventure 19">
+          </a>
+          <a href="assets/images/adventure/adventure-00020.jpg" data-lightbox="adventure" data-title="Adventure 20">
+            <img src="assets/images/adventure/adventure-00020.jpg" alt="Adventure 20">
+          </a>
+          <a href="assets/images/adventure/adventure-00021.jpg" data-lightbox="adventure" data-title="Adventure 21">
+            <img src="assets/images/adventure/adventure-00021.jpg" alt="Adventure 21">
+          </a>
+          <a href="assets/images/adventure/adventure-00022.jpg" data-lightbox="adventure" data-title="Adventure 22">
+            <img src="assets/images/adventure/adventure-00022.jpg" alt="Adventure 22">
+          </a>
+          <a href="assets/images/adventure/adventure-00023.jpg" data-lightbox="adventure" data-title="Adventure 23">
+            <img src="assets/images/adventure/adventure-00023.jpg" alt="Adventure 23">
+          </a>
+          <a href="assets/images/adventure/adventure-00024.jpg" data-lightbox="adventure" data-title="Adventure 24">
+            <img src="assets/images/adventure/adventure-00024.jpg" alt="Adventure 24">
+          </a>
+          <a href="assets/images/adventure/adventure-00025.jpg" data-lightbox="adventure" data-title="Adventure 25">
+            <img src="assets/images/adventure/adventure-00025.jpg" alt="Adventure 25">
+          </a>
+          <a href="assets/images/adventure/adventure-00026.jpg" data-lightbox="adventure" data-title="Adventure 26">
+            <img src="assets/images/adventure/adventure-00026.jpg" alt="Adventure 26">
+          </a>
+          <a href="assets/images/adventure/adventure-00027.jpg" data-lightbox="adventure" data-title="Adventure 27">
+            <img src="assets/images/adventure/adventure-00027.jpg" alt="Adventure 27">
+          </a>
+          <a href="assets/images/adventure/adventure-00028.jpg" data-lightbox="adventure" data-title="Adventure 28">
+            <img src="assets/images/adventure/adventure-00028.jpg" alt="Adventure 28">
+          </a>
+
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="wrap contact">
-      <h3>Contact</h3>
-      <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
-      <p>Instagram: <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">@yourhandle</a></p>
-    </section>
   </main>
 
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lightbox-close" aria-label="Close">×</button>
-    <img class="lightbox-image" alt="">
-    <div class="lightbox-caption"></div>
-    <button class="lightbox-prev" aria-label="Previous">‹</button>
-    <button class="lightbox-next" aria-label="Next">›</button>
-  </div>
-
-  <footer class="site-footer wrap">
-    <small>© <span id="year"></span> Your Name</small>
+  <footer id="contact" class="site-footer">
+    <div class="wrap">
+      <p>&copy; 2025 Imageesegoose. All rights reserved.</p>
+    </div>
   </footer>
 
+  <!-- Lightbox + main scripts (preserved) -->
+  <script src="assets/js/lightbox.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
