@@ -1,0 +1,61 @@
+SAMPLE OUTPUT - Run the script locally to generate real results
+================================================================
+
+This file shows example output from running the diagnostic script.
+To generate actual results from your repository, run:
+
+    bash diagnostics/check_references.sh
+
+==========================================
+Example Output Format
+==========================================
+
+1. Searching for references to 'assets/images/adventure'...
+----------------------------------------------------------
+./some-file.html:    <img src="assets/images/adventure/adventure-00001.jpeg" alt="...">
+./styles.css:  background: url('assets/images/adventure/adventure-00002.jpg');
+
+No references found in repository files.
+
+2. Listing files in 'assets/images/adventure/' directory...
+----------------------------------------------------------
+total 11548
+drwxrwxr-x 2 user user    4096 Dec 23 17:28 .
+drwxrwxr-x 3 user user    4096 Dec 23 17:28 ..
+-rw-rw-r-- 1 user user       1 Dec 23 17:28 .gitkeep
+-rw-rw-r-- 1 user user   69414 Dec 23 17:28 adventure-00001.jpeg
+-rw-rw-r-- 1 user user  824906 Dec 23 17:28 adventure-00002.jpg
+-rw-rw-r-- 1 user user  916158 Dec 23 17:28 adventure-00003.JPG
+[... more files ...]
+
+File count (excluding .gitkeep):
+28
+
+3. Searching for references to 'assets/js/main.js'...
+----------------------------------------------------------
+./index.html:  <script src="assets/js/main.js"></script>
+./about.html:  <script src="assets/js/main.js"></script>
+
+4. Searching for references to 'assets/js/lightbox.js'...
+----------------------------------------------------------
+No references found to assets/js/lightbox.js
+
+==========================================
+Diagnostic scan complete!
+==========================================
+
+Review the output above and refer to diagnostics/DIAGNOSTICS.md
+for interpretation guidance and recommended next steps.
+
+==========================================
+What This Tells You
+==========================================
+
+The output will help you identify:
+- Orphaned image files that are not referenced anywhere
+- HTML/CSS/JS files that reference adventure images
+- Whether lightbox.js is referenced but missing
+- Case sensitivity issues in filenames (jpg vs JPG vs jpeg)
+- Total count of images that may need cleanup
+
+Refer to DIAGNOSTICS.md for detailed interpretation and next steps.
