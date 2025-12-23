@@ -91,9 +91,9 @@ This is a minimal static portfolio website designed for photography and art dire
 ## Common Tasks
 
 ### Adding New Gallery Images
-Add new `<a>` elements inside the `.gallery` div. The current HTML references placeholder SVG files (placeholder1.svg through placeholder6.svg) in assets/images/, though these may need to be created or replaced with actual photos:
+Add new `<a>` elements inside the `.gallery` div. Note: The current index.html references placeholder SVG files (placeholder1.svg through placeholder6.svg) in assets/images/ that don't currently exist - these should be created or replaced with your actual portfolio images:
 ```html
-<!-- Example as shown in current index.html -->
+<!-- Example structure as shown in current index.html (files need to be added to assets/images/) -->
 <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
   <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
 </a>
