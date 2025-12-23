@@ -2,7 +2,8 @@
 # Diagnostic script to check for adventure gallery references and assets
 # This script is safe to run and exits with code 0 even when no matches are found
 
-set -e
+# Maximum number of matches to display for grep searches
+MAX_RESULTS=20
 
 echo "=========================================="
 echo "Adventure Gallery Diagnostics"
@@ -14,7 +15,7 @@ cd "$(dirname "$0")/.."
 
 echo "1. Searching for references to 'assets/images/adventure'..."
 echo "----------------------------------------------------------"
-if grep -r "assets/images/adventure" . --exclude-dir=.git --exclude-dir=diagnostics 2>/dev/null | head -20; then
+if grep -r "assets/images/adventure" . --exclude-dir=.git --exclude-dir=diagnostics 2>/dev/null | head -"$MAX_RESULTS"; then
     echo ""
 else
     echo "No references found in repository files."
