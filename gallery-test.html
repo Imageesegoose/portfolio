@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery Test — Your Name</title>
+  <meta name="description" content="Gallery test page for @andyzg/gallery integration." />
+  <!-- Google Font: Major Mono Display (loaded before CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <!-- site CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <!-- Use the uploaded SVG logo -->
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Your Name</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <h2>Gallery Test Page</h2>
+      <p class="lead">Testing @andyzg/gallery integration with the portfolio site.</p>
+    </section>
+
+    <section id="gallery-test" class="wrap portfolio">
+      <h3>Gallery Test</h3>
+      <div class="gallery" id="gallery">
+        <!-- Test gallery items using adventure photos -->
+        <a href="assets/images/adventure/adventure-00001.jpeg" data-caption="Gallery Test — Adventure 1" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00001.jpeg" alt="Gallery Test — Adventure 1" loading="lazy">
+        </a>
+        <a href="assets/images/adventure/adventure-00002.jpg" data-caption="Gallery Test — Adventure 2" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00002.jpg" alt="Gallery Test — Adventure 2" loading="lazy">
+        </a>
+        <a href="assets/images/adventure/adventure-00003.JPG" data-caption="Gallery Test — Adventure 3" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00003.JPG" alt="Gallery Test — Adventure 3" loading="lazy">
+        </a>
+        <a href="assets/images/adventure/adventure-00004.jpg" data-caption="Gallery Test — Adventure 4" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00004.jpg" alt="Gallery Test — Adventure 4" loading="lazy">
+        </a>
+        <a href="assets/images/adventure/adventure-00005.JPG" data-caption="Gallery Test — Adventure 5" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00005.JPG" alt="Gallery Test — Adventure 5" loading="lazy">
+        </a>
+        <a href="assets/images/adventure/adventure-00006.JPG" data-caption="Gallery Test — Adventure 6" class="gallery-item">
+          <img src="assets/images/adventure/adventure-00006.JPG" alt="Gallery Test — Adventure 6" loading="lazy">
+        </a>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <h3>About This Test</h3>
+      <p>This page demonstrates the gallery functionality that will be enhanced with @andyzg/gallery library integration. The gallery uses the same styling and structure as the main portfolio page.</p>
+      <p><a href="index.html">← Back to Portfolio</a></p>
+    </section>
+  </main>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <img class="lightbox-image" alt="">
+    <div class="lightbox-caption"></div>
+    <button class="lightbox-prev" aria-label="Previous">‹</button>
+    <button class="lightbox-next" aria-label="Next">›</button>
+  </div>
+
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Your Name</small>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
