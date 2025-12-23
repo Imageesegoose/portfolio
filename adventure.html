@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adventure</title>
+  <meta name="description" content="Adventure page — integration harness for @andyzg/gallery" />
+  <!-- Use same site stylesheet as the main site -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Small page-specific styles to keep the test layout tidy -->
+  <style>
+    .gallery-test .lead { margin-bottom: 1rem; color: #444; }
+    .gallery-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-top:1rem; }
+    .gallery-item { display:block; background:#f7f7f7; border-radius:6px; overflow:hidden; text-decoration:none; color:inherit; }
+    .gallery-item img { width:100%; height: auto; display:block; }
+    .gallery-note { font-size:0.95rem; color:#666; margin-top:0.25rem; }
+  </style>
+</head>
+<body>
+  <!--
+    Adventure Page
+    --------------
+    This page is a non-destructive test harness for integrating the @andyzg/gallery tool.
+    It was added on a feature branch for review and does not change existing site files.
+  -->
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Your Name</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#portfolio">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <h2>Adventure</h2>
+      <p class="lead">A safe test page that integrates <code>@andyzg/gallery</code>. This page is for review on a branch — nothing here modifies the live site until merged.</p>
+    </section>
+
+    <section id="gallery-test" class="wrap gallery-test">
+      <h3>Adventure</h3>
+      <p class="gallery-note">This Adventure gallery will try to use images from your repository (assets/images/*). If none are found it falls back to placeholders.</p>
+
+      <div id="gallery-root" class="gallery-grid" aria-live="polite">
+        <!-- Grid items will be inserted dynamically by the script below -->
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Your Name</small>
+  </footer>
+
+  <script>
+    // footer year
+    (function(){ try { var y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); } catch(e){} })();
+  </script>
+
+  <script type="module">
+    const root = document.getElementById('gallery-root');
+    const MAX = 6;
+    const tried = new Set();
+    const results = [];
+
+    const folders = [
+      'assets/images/gallery/',
+      'assets/images/',
+      'assets/images/adventure/',
+      'assets/images/portfolio/'
+    ];
+    const names = [
+      '1','01','001','image1','image01','adventure-00001','adventure-0001'
+    ];
+    const exts = ['jpg','jpeg','png','webp'];
+
+    const candidates = [];
+    folders.forEach(folder => {
+      names.forEach(n => exts.forEach(ext => {
+        candidates.push(folder + n + '.' + ext);
+      }));
+    });
+    for(let i=1;i<=12;i++){
+      const i1 = i.toString();
+      candidates.push('assets/images/gallery/' + i1 + '.jpg');
+      candidates.push('assets/images/gallery/' + i1 + '.jpeg');
+      candidates.push('assets/images/gallery/' + i1 + '.png');
+      candidates.push('assets/images/' + i1 + '.jpg');
+    }
+
+    function imageExists(url){
+      return new Promise(resolve => {
+        if(tried.has(url)) return resolve(false);
+        tried.add(url);
+        const img = new Image();
+        img.onload = ()=> resolve(true);
+        img.onerror = ()=> resolve(false);
+        img.src = url;
+      });
+    }
+
+    async function collectImages(){
+      for(const url of candidates){
+        if(results.length >= MAX) break;
+        try{
+          const ok = await imageExists(url);
+          if(ok){
+            results.push(url);
+          }
+        } catch(e){}
+      }
+
+      if(results.length === 0){
+        for(let i=1;i<=MAX;i++){
+          results.push('https://via.placeholder.com/800x600?text=Image+'+i);
+        }
+      }
+
+      renderGrid(results);
+      initializeExternalGallery(results);
+    }
+
+    function renderGrid(list){
+      root.innerHTML = '';
+      list.forEach((src, idx) => {
+        const a = document.createElement('a');
+        a.href = src;
+        a.className = 'gallery-item';
+        a.setAttribute('data-caption', 'Test image ' + (idx+1));
+        a.target = '_self';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Test image ' + (idx+1);
+        img.loading = 'lazy';
+
+        a.appendChild(img);
+        root.appendChild(a);
+      });
+    }
+
+    async function initializeExternalGallery(list){
+      try{
+        const mod = await import('https://cdn.jsdelivr.net/npm/@andyzg/gallery/dist/index.module.js').catch(()=>null)
+                 || await import('https://cdn.jsdelivr.net/npm/@andyzg/gallery').catch(()=>null)
+                 || null;
+
+        if(mod && (mod.default || mod.init || mod.Gallery)){
+          try {
+            const Gallery = mod.default || mod.Gallery || mod;
+            if(typeof Gallery === 'function'){
+              new Gallery(root, { captionSelector: '.gallery-item', imageSelector: 'img' });
+              console.log('[gallery-test] @andyzg/gallery initialized (constructor).');
+              return;
+            }
+          } catch(e){}
+          try {
+            if(typeof mod.init === 'function'){
+              mod.init(root, { captionSelector: '.gallery-item' });
+              console.log('[gallery-test] @andyzg/gallery initialized (init).');
+              return;
+            }
+          } catch(e){}
+        }
+        console.log('[gallery-test] @andyzg/gallery module imported but no known init method found — using fallback behavior.');
+      } catch(err){
+        console.log('[gallery-test] Could not import @andyzg/gallery from CDN; using fallback behavior.', err && err.message ? err.message : err);
+      }
+
+      addSimpleLightboxFallback();
+    }
+
+    function addSimpleLightboxFallback(){
+      if(window.__simple_gallery_installed) return;
+      window.__simple_gallery_installed = true;
+
+      const lb = document.createElement('div');
+      lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:1200;padding:20px;';
+      lb.id = 'gt-lightbox';
+      lb.innerHTML = '<button id="gt-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:28px;color:#fff;background:none;border:0;cursor:pointer">×</button><img id="gt-img" style="max-width:92%;max-height:92%;box-shadow:0 8px 30px rgba(0,0,0,0.6)"><div id="gt-caption" style="color:#fff;margin-top:12px;text-align:center;max-width:90%"></div>';
+      document.body.appendChild(lb);
+      const imgEl = lb.querySelector('#gt-img');
+      const captionEl = lb.querySelector('#gt-caption');
+      const closeBtn = lb.querySelector('#gt-close');
+      function open(src, caption){
+        imgEl.src = src;
+        captionEl.textContent = caption || '';
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      function close(){
+        lb.style.display = 'none';
+        imgEl.src = '';
+        document.body.style.overflow = '';
+      }
+      closeBtn.addEventListener('click', close);
+      lb.addEventListener('click', (e)=> { if(e.target === lb) close(); });
+
+      root.querySelectorAll('a.gallery-item').forEach(a => {
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          const href = a.getAttribute('href');
+          const caption = a.getAttribute('data-caption') || '';
+          open(href, caption);
+        });
+      });
+    }
+
+    collectImages();
+  </script>
+
+</body>
+</html>
