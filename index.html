@@ -1,156 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Portfolio — Imageesegoose</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link rel="stylesheet" href="assets/css/lightbox.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Your Name</title>
+  <meta name="description" content="About — Art director and photographer." />
+  <!-- Google Font: Major Mono Display (loaded before CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <!-- site CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="wrap">
-      <a class="logo" href="index.html">Imageesegoose</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="adventure.html">Adventure</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Your Name</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Portfolio section (preserved) -->
-    <section id="portfolio" class="portfolio">
-      <div class="wrap">
-        <h1>Selected Work</h1>
-        <p>Welcome to my portfolio. Below are some featured projects and images.</p>
-        <!-- Example portfolio items (placeholder) -->
-        <div class="cards">
-          <article class="card">
-            <img src="assets/images/sample-01.jpg" alt="Sample 1">
-            <h3>Project One</h3>
-          </article>
-          <article class="card">
-            <img src="assets/images/sample-02.jpg" alt="Sample 2">
-            <h3>Project Two</h3>
-          </article>
-        </div>
-      </div>
+    <section class="wrap about">
+      <h1>About</h1>
+      <p class="bio">"Where are you from?" has always been a tricky question for me. I grew up bouncing around the USA and Germany. However, I claim the boot at the bottom of the map (Louisiana) a[...] 
+
+Louisiana, the Mississippi River and ultimately the South have carved a special place in my heart. Together they are a wonderfully strange place that I love to share with others. 
+
+In 2017, I left a sweet gig as a full time university photographer at Tennessee Tech to travel the world with my wife for one year. 
+
+Currently, we live in Houston, TX, where I am the Art Director for University of Houston. 
+
+My personal work tends to focus on environmental portraits. It still amazes me how a camera and a smile can break down social barriers, including the ones I place on myself. 
+
+I enjoy a cold IPA, a cup of tepid black coffee, a non-toasted everything bagel, sketchy food trucks, a furrowed brow, a good conversation, a cranky vintage motorcycle and cranky film cameras."</p>
+
+      <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a></p>
     </section>
-
-    <!-- Adventure gallery section (added) -->
-    <section id="adventure" class="gallery">
-      <div class="wrap">
-        <h2>Adventure Gallery</h2>
-        <p>A selection of adventure photos. Click an image to open the lightbox.</p>
-
-        <div class="gallery-grid">
-          <!-- 28 images -->
-          <!-- Images are located at assets/images/adventure/adventure-00001.jpg ... adventure-00028.jpg -->
-          
-          <a href="assets/images/adventure/adventure-00001.jpg" data-lightbox="adventure" data-title="Adventure 1">
-            <img src="assets/images/adventure/adventure-00001.jpg" alt="Adventure 1">
-          </a>
-          <a href="assets/images/adventure/adventure-00002.jpg" data-lightbox="adventure" data-title="Adventure 2">
-            <img src="assets/images/adventure/adventure-00002.jpg" alt="Adventure 2">
-          </a>
-          <a href="assets/images/adventure/adventure-00003.jpg" data-lightbox="adventure" data-title="Adventure 3">
-            <img src="assets/images/adventure/adventure-00003.jpg" alt="Adventure 3">
-          </a>
-          <a href="assets/images/adventure/adventure-00004.jpg" data-lightbox="adventure" data-title="Adventure 4">
-            <img src="assets/images/adventure/adventure-00004.jpg" alt="Adventure 4">
-          </a>
-          <a href="assets/images/adventure/adventure-00005.jpg" data-lightbox="adventure" data-title="Adventure 5">
-            <img src="assets/images/adventure/adventure-00005.jpg" alt="Adventure 5">
-          </a>
-          <a href="assets/images/adventure/adventure-00006.jpg" data-lightbox="adventure" data-title="Adventure 6">
-            <img src="assets/images/adventure/adventure-00006.jpg" alt="Adventure 6">
-          </a>
-          <a href="assets/images/adventure/adventure-00007.jpg" data-lightbox="adventure" data-title="Adventure 7">
-            <img src="assets/images/adventure/adventure-00007.jpg" alt="Adventure 7">
-          </a>
-          <a href="assets/images/adventure/adventure-00008.jpg" data-lightbox="adventure" data-title="Adventure 8">
-            <img src="assets/images/adventure/adventure-00008.jpg" alt="Adventure 8">
-          </a>
-          <a href="assets/images/adventure/adventure-00009.jpg" data-lightbox="adventure" data-title="Adventure 9">
-            <img src="assets/images/adventure/adventure-00009.jpg" alt="Adventure 9">
-          </a>
-          <a href="assets/images/adventure/adventure-00010.jpg" data-lightbox="adventure" data-title="Adventure 10">
-            <img src="assets/images/adventure/adventure-00010.jpg" alt="Adventure 10">
-          </a>
-          <a href="assets/images/adventure/adventure-00011.jpg" data-lightbox="adventure" data-title="Adventure 11">
-            <img src="assets/images/adventure/adventure-00011.jpg" alt="Adventure 11">
-          </a>
-          <a href="assets/images/adventure/adventure-00012.jpg" data-lightbox="adventure" data-title="Adventure 12">
-            <img src="assets/images/adventure/adventure-00012.jpg" alt="Adventure 12">
-          </a>
-          <a href="assets/images/adventure/adventure-00013.jpg" data-lightbox="adventure" data-title="Adventure 13">
-            <img src="assets/images/adventure/adventure-00013.jpg" alt="Adventure 13">
-          </a>
-          <a href="assets/images/adventure/adventure-00014.jpg" data-lightbox="adventure" data-title="Adventure 14">
-            <img src="assets/images/adventure/adventure-00014.jpg" alt="Adventure 14">
-          </a>
-          <a href="assets/images/adventure/adventure-00015.jpg" data-lightbox="adventure" data-title="Adventure 15">
-            <img src="assets/images/adventure/adventure-00015.jpg" alt="Adventure 15">
-          </a>
-          <a href="assets/images/adventure/adventure-00016.jpg" data-lightbox="adventure" data-title="Adventure 16">
-            <img src="assets/images/adventure/adventure-00016.jpg" alt="Adventure 16">
-          </a>
-          <a href="assets/images/adventure/adventure-00017.jpg" data-lightbox="adventure" data-title="Adventure 17">
-            <img src="assets/images/adventure/adventure-00017.jpg" alt="Adventure 17">
-          </a>
-          <a href="assets/images/adventure/adventure-00018.jpg" data-lightbox="adventure" data-title="Adventure 18">
-            <img src="assets/images/adventure/adventure-00018.jpg" alt="Adventure 18">
-          </a>
-          <a href="assets/images/adventure/adventure-00019.jpg" data-lightbox="adventure" data-title="Adventure 19">
-            <img src="assets/images/adventure/adventure-00019.jpg" alt="Adventure 19">
-          </a>
-          <a href="assets/images/adventure/adventure-00020.jpg" data-lightbox="adventure" data-title="Adventure 20">
-            <img src="assets/images/adventure/adventure-00020.jpg" alt="Adventure 20">
-          </a>
-          <a href="assets/images/adventure/adventure-00021.jpg" data-lightbox="adventure" data-title="Adventure 21">
-            <img src="assets/images/adventure/adventure-00021.jpg" alt="Adventure 21">
-          </a>
-          <a href="assets/images/adventure/adventure-00022.jpg" data-lightbox="adventure" data-title="Adventure 22">
-            <img src="assets/images/adventure/adventure-00022.jpg" alt="Adventure 22">
-          </a>
-          <a href="assets/images/adventure/adventure-00023.jpg" data-lightbox="adventure" data-title="Adventure 23">
-            <img src="assets/images/adventure/adventure-00023.jpg" alt="Adventure 23">
-          </a>
-          <a href="assets/images/adventure/adventure-00024.jpg" data-lightbox="adventure" data-title="Adventure 24">
-            <img src="assets/images/adventure/adventure-00024.jpg" alt="Adventure 24">
-          </a>
-          <a href="assets/images/adventure/adventure-00025.jpg" data-lightbox="adventure" data-title="Adventure 25">
-            <img src="assets/images/adventure/adventure-00025.jpg" alt="Adventure 25">
-          </a>
-          <a href="assets/images/adventure/adventure-00026.jpg" data-lightbox="adventure" data-title="Adventure 26">
-            <img src="assets/images/adventure/adventure-00026.jpg" alt="Adventure 26">
-          </a>
-          <a href="assets/images/adventure/adventure-00027.jpg" data-lightbox="adventure" data-title="Adventure 27">
-            <img src="assets/images/adventure/adventure-00027.jpg" alt="Adventure 27">
-          </a>
-          <a href="assets/images/adventure/adventure-00028.jpg" data-lightbox="adventure" data-title="Adventure 28">
-            <img src="assets/images/adventure/adventure-00028.jpg" alt="Adventure 28">
-          </a>
-
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <footer id="contact" class="site-footer">
-    <div class="wrap">
-      <p>&copy; 2025 Imageesegoose. All rights reserved.</p>
-    </div>
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Your Name</small>
   </footer>
 
-  <!-- Lightbox + main scripts (preserved) -->
-  <script src="assets/js/lightbox.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
