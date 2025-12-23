@@ -1,89 +1,39 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>cordacreative</title>
-  <meta name="description" content="Portfolio of an art director with emphasis on photography." />
-  <!-- Google Font: Major Mono Display (loaded before CSS) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
-  <!-- site CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="/">
-        <!-- Use the uploaded SVG logo -->
-        <img src="assets/images/logo.svg" alt="Logo" class="logo">
-        <span class="site-title">Your Name</span>
-      </a>
-      <nav class="site-nav">
-        <a href="#portfolio">Portfolio</a>
-        <a href="/about.html">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero wrap">
-      <h2>Art Direction &amp; Photography</h2>
-      <p class="lead">Minimal, editorial-driven imagery and concept-led creative direction.</p>
-    </section>
-
-    <section id="portfolio" class="wrap portfolio">
-      <h3>Selected Work</h3>
-      <div class="gallery" id="gallery">
-        <!-- Replace these with your images in assets/images/ or use raw GitHub URLs -->
-        <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
-          <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio - Home</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <img src="assets/logo.png" alt="Logo" />
         </a>
-        <a href="assets/images/placeholder2.svg" data-caption="Project — Editorial Series" class="gallery-item">
-          <img src="assets/images/placeholder2.svg" alt="Project — Editorial Series" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder3.svg" data-caption="Project — Campaign" class="gallery-item">
-          <img src="assets/images/placeholder3.svg" alt="Project — Campaign" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder4.svg" data-caption="Project — Landscape" class="gallery-item">
-          <img src="assets/images/placeholder4.svg" alt="Project — Landscape" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder5.svg" data-caption="Project — Still Life" class="gallery-item">
-          <img src="assets/images/placeholder5.svg" alt="Project — Still Life" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder6.svg" data-caption="Project — Concept Series" class="gallery-item">
-          <img src="assets/images/placeholder6.svg" alt="Project — Concept Series" loading="lazy">
-        </a>
+        <nav class="site-nav">
+          <a href="#portfolio">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <section id="about" class="wrap about">
-      <h3>About</h3>
-      <p><a href="/about.html">Read more about me →</a></p>
-    </section>
+    <main>
+      <section id="portfolio">
+        <h1>My Work</h1>
+        <!-- portfolio items -->
+      </section>
 
-    <section id="contact" class="wrap contact">
-      <h3>Contact</h3>
-      <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
-      <p>Instagram: <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener noreferrer">@yourhandle</a></p>
-    </section>
-  </main>
+      <section id="contact">
+        <h2>Contact</h2>
+        <!-- contact form -->
+      </section>
+    </main>
 
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lightbox-close" aria-label="Close">×</button>
-    <img class="lightbox-image" alt="">
-    <div class="lightbox-caption"></div>
-    <button class="lightbox-prev" aria-label="Previous">‹</button>
-    <button class="lightbox-next" aria-label="Next">›</button>
-  </div>
-
-  <footer class="site-footer wrap">
-    <small>© <span id="year"></span> Your Name</small>
-  </footer>
-
-  <script src="assets/js/main.js"></script>
-</body>
+    <footer>
+      <p>&copy; 2025 Imageesegoose</p>
+    </footer>
+  </body>
 </html>
