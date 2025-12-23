@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery Test - @andyzg/gallery</title>
+  <meta name="description" content="Test page for @andyzg/gallery integration." />
+  <!-- Google Font: Major Mono Display (loaded before CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <!-- site CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Gallery Test</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap">
+      <h1>Gallery Test - @andyzg/gallery</h1>
+      <p>This page tests integration of <code>@andyzg/gallery</code> via CDN.</p>
+      <div id="gallery-container">
+        <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits">
+          <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
+        </a>
+        <a href="assets/images/placeholder2.svg" data-caption="Project — Editorial Series">
+          <img src="assets/images/placeholder2.svg" alt="Project — Editorial Series" loading="lazy">
+        </a>
+        <a href="assets/images/placeholder3.svg" data-caption="Project — Campaign">
+          <img src="assets/images/placeholder3.svg" alt="Project — Campaign" loading="lazy">
+        </a>
+        <a href="assets/images/placeholder4.svg" data-caption="Project — Landscape">
+          <img src="assets/images/placeholder4.svg" alt="Project — Landscape" loading="lazy">
+        </a>
+        <a href="assets/images/placeholder5.svg" data-caption="Project — Still Life">
+          <img src="assets/images/placeholder5.svg" alt="Project — Still Life" loading="lazy">
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Gallery Test</small>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script type="module">
+    import { Gallery } from 'https://cdn.jsdelivr.net/npm/@andyzg/gallery/+esm';
+    const gallery = new Gallery('#gallery-container');
+  </script>
+</body>
+</html>
