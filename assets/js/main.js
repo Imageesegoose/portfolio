@@ -1,6 +1,36 @@
 (function () {
   'use strict';
 
+  // Mobile menu toggle
+  (function initMobileMenu() {
+    var menuBtn = document.getElementById('mobile-menu-btn');
+    var nav = document.getElementById('site-nav');
+    var overlay = document.getElementById('mobile-menu-overlay');
+    
+    if (!menuBtn || !nav || !overlay) return;
+    
+    function toggleMenu() {
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    function closeMenu() {
+      nav.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    menuBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+    
+    // Close menu when clicking nav links
+    var navLinks = nav.querySelectorAll('a');
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', closeMenu);
+    }
+  })();
+
   // footer year
   try {
     var yEl = document.getElementById('year');
