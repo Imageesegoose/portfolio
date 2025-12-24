@@ -1,1 +1,114 @@
-Retrieve the file content from its current location to update on the new path.
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adventure</title>
+  <meta name="description" content="Adventure gallery — integration harness for @andyzg/gallery" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .gallery-test .lead { margin-bottom: 1rem; color: #444; }
+    .gallery-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-top:1rem; }
+    .gallery-item { display:block; background:#f7f7f7; border-radius:6px; overflow:hidden; text-decoration:none; color:inherit; }
+    .gallery-item img { width:100%; height: auto; display:block; }
+    .gallery-note { font-size:0.95rem; color:#666; margin-top:0.25rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Your Name</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#portfolio">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <h2>Adventure</h2>
+      <p class="lead">A safe Adventure gallery test page that integrates <code>@andyzg/gallery</code>. This page is for review on a branch — nothing here modifies the live site until merged.</p>
+    </section>
+    <section id="gallery-test" class="wrap gallery-test">
+      <h3>Adventure gallery</h3>
+      <p class="gallery-note">This test will attempt to use images from your repository (assets/images/*). If none are found it falls back to placeholders.</p>
+      <div id="gallery-root" class="gallery-grid" aria-live="polite">
+        <!-- Grid items inserted by the script -->
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Your Name</small>
+  </footer>
+  <script>
+    (function(){ try { var y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear(); } catch(e){} })();
+  </script>
+  <script type="module">
+    const root = document.getElementById('gallery-root');
+    const MAX = 6;
+    const tried = new Set();
+    const results = [];
+    const folders = [
+      'assets/images/gallery/',
+      'assets/images/',
+      'assets/images/adventure/',
+      'assets/images/portfolio/'
+    ];
+    const names = ['1','01','001','image1','image01','adventure-00001','adventure-0001'];
+    const exts = ['jpg','jpeg','png','webp'];
+    const candidates = [];
+    folders.forEach(folder => {
+      names.forEach(n => exts.forEach(ext => candidates.push(folder + n + '.' + ext)));
+    });
+    for(let i=1;i<=12;i++){
+      const i1 = i.toString();
+      candidates.push('assets/images/gallery/' + i1 + '.jpg');
+      candidates.push('assets/images/gallery/' + i1 + '.jpeg');
+      candidates.push('assets/images/gallery/' + i1 + '.png');
+      candidates.push('assets/images/' + i1 + '.jpg');
+    }
+    function imageExists(url){
+      return new Promise(resolve => {
+        if(tried.has(url)) return resolve(false);
+        tried.add(url);
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+    }
+    async function collectImages(){
+      for(const url of candidates){
+        if(results.length >= MAX) break;
+        try {
+          const ok = await imageExists(url);
+          if(ok) results.push(url);
+        } catch(e){}
+      }
+      if(results.length === 0){
+        for(let i=1;i<=MAX;i++) results.push('https://via.placeholder.com/800x600?text=Adventure+'+i);
+      }
+      renderGrid(results);
+    }
+    function renderGrid(list){
+      root.innerHTML = '';
+      list.forEach((src, idx) => {
+        const a = document.createElement('a');
+        a.href = src;
+        a.className = 'gallery-item';
+        a.setAttribute('data-caption', 'Adventure image ' + (idx+1));
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Adventure image ' + (idx+1);
+        a.appendChild(img);
+        root.appendChild(a);
+      });
+    }
+    collectImages();
+  </script>
+</body>
+</html>
