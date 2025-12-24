@@ -158,8 +158,6 @@
         // Try loading thumbnail first, fallback to full-size if thumbnail doesn't exist
         img.src = thumbPath;
         
-        var thumbnailFailed = false;
-        
         // Handle successful image load
         img.addEventListener('load', function() {
           anchor.classList.remove('loading');
@@ -167,8 +165,8 @@
         
         // Handle image load errors with fallback to full-size image
         img.addEventListener('error', function() {
-          if (!thumbnailFailed) {
-            thumbnailFailed = true;
+          // Check if we're currently trying to load the thumbnail
+          if (img.src === thumbPath || img.src.endsWith(thumbPath)) {
             // Fallback to full-size image
             img.src = fullSizePath;
           } else {
