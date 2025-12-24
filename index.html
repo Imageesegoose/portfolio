@@ -162,30 +162,33 @@
       
       // Wait for main.js lightbox to initialize, then attach handlers to dynamically created items
       // main.js sets window.__site_lightbox_installed when ready
+      var lightboxAttached = false;
       var checkLightbox = function() {
-        if (window.__site_lightbox_installed) {
+        if (window.__site_lightbox_installed && !lightboxAttached) {
+          lightboxAttached = true;
           var items = document.querySelectorAll('#gallery a.gallery-item');
           for (var i = 0; i < items.length; i++) {
-            // Re-query the lightbox handler from main.js
-            var item = items[i];
-            item.addEventListener('click', function(e) {
-              e.preventDefault();
-              var href = this.getAttribute('href') || this.dataset.href;
-              if (!href) return;
-              var caption = this.getAttribute('data-caption') || this.getAttribute('title') || '';
-              // Access the lightbox created by main.js
-              var lb = document.getElementById('simple-lightbox');
-              if (lb) {
-                var img = lb.querySelector('#slb-img');
-                var cap = lb.querySelector('#slb-caption');
-                img.src = href;
-                cap.textContent = caption;
-                lb.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-              }
-            });
+            // Use IIFE to create proper closure for each item
+            (function(item) {
+              item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var href = item.getAttribute('href') || item.dataset.href;
+                if (!href) return;
+                var caption = item.getAttribute('data-caption') || item.getAttribute('title') || '';
+                // Access the lightbox created by main.js
+                var lb = document.getElementById('simple-lightbox');
+                if (lb) {
+                  var img = lb.querySelector('#slb-img');
+                  var cap = lb.querySelector('#slb-caption');
+                  img.src = href;
+                  cap.textContent = caption;
+                  lb.style.display = 'flex';
+                  document.body.style.overflow = 'hidden';
+                }
+              });
+            })(items[i]);
           }
-        } else {
+        } else if (!window.__site_lightbox_installed) {
           // If lightbox not ready yet, check again in 50ms
           setTimeout(checkLightbox, 50);
         }
