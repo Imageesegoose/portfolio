@@ -28,42 +28,27 @@
     const navLinks = nav.querySelectorAll('a');
     navLinks.forEach(link => {
       // Don't close menu if it's the dropdown parent link
-      if (link.parentElement.classList.contains('dropdown') && 
-          link.getAttribute('onclick') === 'return false;') {
-        return;
+      const isDropdownParent = link.parentElement.classList.contains('dropdown') && 
+                               link.nextElementSibling && 
+                               link.nextElementSibling.classList.contains('dropdown-content');
+      if (!isDropdownParent) {
+        link.addEventListener('click', closeMenu);
       }
-      link.addEventListener('click', closeMenu);
     });
     
-    // Mobile dropdown toggle
+    // Mobile dropdown toggle - always attach handlers, behavior controlled by CSS
     const dropdowns = nav.querySelectorAll('.dropdown');
     dropdowns.forEach(dropdown => {
-      const parentLink = dropdown.querySelector('a[onclick="return false;"]');
-      if (parentLink && window.innerWidth <= 640) {
+      const parentLink = dropdown.querySelector('a[href="#"]');
+      if (parentLink) {
         parentLink.addEventListener('click', function(e) {
           e.preventDefault();
-          dropdown.classList.toggle('active');
+          // Only toggle on mobile (CSS will handle showing on desktop via hover)
+          if (window.innerWidth <= 640) {
+            dropdown.classList.toggle('active');
+          }
         });
       }
-    });
-    
-    // Handle window resize to reinitialize dropdown behavior
-    let resizeDropdownTimer;
-    window.addEventListener('resize', function() {
-      clearTimeout(resizeDropdownTimer);
-      resizeDropdownTimer = setTimeout(function() {
-        if (window.innerWidth <= 640) {
-          dropdowns.forEach(dropdown => {
-            const parentLink = dropdown.querySelector('a[onclick="return false;"]');
-            if (parentLink) {
-              parentLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-              });
-            }
-          });
-        }
-      }, 250);
     });
   })();
 
