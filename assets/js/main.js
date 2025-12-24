@@ -1,6 +1,40 @@
 (function () {
   'use strict';
 
+  // Dark mode toggle functionality
+  (function initDarkMode() {
+    const toggle = document.getElementById("dark-mode-toggle");
+    if (!toggle) return;
+
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const storedMode = localStorage.getItem("theme");
+
+    // Apply stored preference or OS preference
+    if (storedMode) {
+      const isDark = storedMode === "dark";
+      document.body.classList.toggle("dark-mode", isDark);
+      toggle.checked = isDark;
+    } else if (darkModeMediaQuery.matches) {
+      document.body.classList.add("dark-mode");
+      toggle.checked = true;
+    }
+
+    // Toggle handler
+    toggle.addEventListener("change", function() {
+      const enableDark = toggle.checked;
+      document.body.classList.toggle("dark-mode", enableDark);
+      localStorage.setItem("theme", enableDark ? "dark" : "light");
+    });
+
+    // Listen for OS preference changes (only if user hasn't manually set preference)
+    darkModeMediaQuery.addEventListener("change", function(e) {
+      if (!localStorage.getItem("theme")) {
+        document.body.classList.toggle("dark-mode", e.matches);
+        toggle.checked = e.matches;
+      }
+    });
+  })();
+
   // Mobile menu toggle
   (function initMobileMenu() {
     const MOBILE_BREAKPOINT = 640; // Match CSS media query breakpoint

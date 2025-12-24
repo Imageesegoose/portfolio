@@ -1,5 +1,5 @@
  :root{
-  /* Slightly off-white background, deep black foreground */
+  /* Light mode colors (default) */
   --bg: #fbf9f7;
   --fg:#111;
   --muted:#777;
@@ -10,6 +10,22 @@
   --display-font: 'Major Mono Display', monospace;
   /* Use a readable system stack for body text; if you want Inter too, add it via Google Fonts */
   --body-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Dark mode colors */
+body.dark-mode {
+  --bg: #013220;
+  --fg: #fbf9f7;
+  --muted: #b8b8b8;
+  --accent: #fbf9f7;
+}
+
+body.dark-mode .site-footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+body.dark-mode .dropdown-content {
+  box-shadow: 0 8px 16px rgba(255,255,255,0.1);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -110,6 +126,10 @@ body{
 /* Change color on hover */
 .site-nav .dropdown-content a:hover{
   background:rgba(0,0,0,0.04);
+}
+
+body.dark-mode .site-nav .dropdown-content a:hover{
+  background:rgba(255,255,255,0.08);
 }
 /* Show the dropdown menu on hover */
 .site-nav .dropdown:hover .dropdown-content{
@@ -302,6 +322,26 @@ body{
   padding:40px 0;
   color:var(--muted);
   border-top:1px solid rgba(0,0,0,0.06);
+}
+
+/* Dark mode toggle styles */
+.footer-toggle {
+  margin-bottom: 16px;
+}
+.footer-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--display-font);
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.footer-toggle input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
 }
 
 /* Quick tweaks for captions / bio */
