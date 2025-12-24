@@ -77,6 +77,10 @@ body{
   font-size:24px;
   line-height:1;
 }
+.mobile-menu-btn:focus{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
 .hero{
   text-align:center;
   padding:56px 0;
@@ -123,11 +127,11 @@ body{
 }
 @media (max-width:1000px){ .gallery{column-count:2} }
 @media (max-width:640px){ 
-  .gallery{column-count:1} 
-  .hero{padding:28px 0}
-  .logo{width:180px}
-  .site-title{font-size:14px}
-  .mobile-menu-btn{display:block}
+  .gallery{column-count:1;} 
+  .hero{padding:28px 0;}
+  .logo{width:180px;}
+  .site-title{font-size:14px;}
+  .mobile-menu-btn{display:block;}
   .site-nav{
     position:fixed;
     top:0;
@@ -144,8 +148,8 @@ body{
     transition:right 0.3s ease;
     z-index:1000;
   }
-  .site-nav.active{right:0}
-  .site-nav a{font-size:18px}
+  .site-nav.active{right:0;}
+  .site-nav a{font-size:18px;}
   .mobile-menu-overlay{
     display:none;
     position:fixed;
@@ -153,7 +157,7 @@ body{
     background:rgba(0,0,0,0.5);
     z-index:999;
   }
-  .mobile-menu-overlay.active{display:block}
+  .mobile-menu-overlay.active{display:block;}
 }
 
 .lightbox{
