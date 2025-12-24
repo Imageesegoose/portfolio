@@ -11,48 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
   <!-- site CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <style>
-    /* Adventure-specific styles for masonry grid */
-    .adventure-gallery {
-      column-gap: var(--gap);
-      column-count: 3;
-    }
-    .adventure-gallery .gallery-item {
-      display: inline-block;
-      width: 100%;
-      margin: 0 0 var(--gap);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      break-inside: avoid;
-      position: relative;
-    }
-    .adventure-gallery .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-      box-shadow: 0 6px 18px rgba(10,10,10,0.06);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .adventure-gallery .gallery-item:hover img,
-    .adventure-gallery .gallery-item:focus img {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(10,10,10,0.12);
-    }
-    .adventure-gallery .gallery-item.loading img {
-      opacity: 0.6;
-    }
-    .adventure-gallery .gallery-item.error {
-      display: none;
-    }
-    @media (max-width:1000px) { 
-      .adventure-gallery { column-count: 2; } 
-    }
-    @media (max-width:640px) { 
-      .adventure-gallery { column-count: 1; } 
-    }
-  </style>
 </head>
 <body>
   <header class="site-header">
@@ -136,15 +94,15 @@
       function createAdventureLightbox() {
         if (window.__adventure_lightbox) return window.__adventure_lightbox;
         
-        var lb = document.createElement('div');
+        const lb = document.createElement('div');
         lb.id = 'adventure-lightbox';
         lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:24px;';
         lb.innerHTML = '<button id="alb-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:36px;color:#fff;background:none;border:0;cursor:pointer;padding:12px;">×</button><img id="alb-img" style="max-width:90%;max-height:80%;object-fit:contain;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,0.6);"><div id="alb-caption" style="color:#eee;margin-top:12px;text-align:center;"></div>';
         document.body.appendChild(lb);
         
-        var img = lb.querySelector('#alb-img');
-        var caption = lb.querySelector('#alb-caption');
-        var closeBtn = lb.querySelector('#alb-close');
+        const img = lb.querySelector('#alb-img');
+        const caption = lb.querySelector('#alb-caption');
+        const closeBtn = lb.querySelector('#alb-close');
         
         function open(src, text) {
           img.src = src;
@@ -173,7 +131,7 @@
         return window.__adventure_lightbox;
       }
       
-      var lightbox = createAdventureLightbox();
+      const lightbox = createAdventureLightbox();
       
       // Create gallery items
       imageExtensions.forEach(function(imgInfo) {
@@ -204,8 +162,8 @@
         // Attach lightbox click handler
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
-          var href = anchor.getAttribute('href');
-          var cap = anchor.getAttribute('data-caption') || '';
+          const href = anchor.getAttribute('href');
+          const cap = anchor.getAttribute('data-caption') || '';
           lightbox.open(href, cap);
         });
         
