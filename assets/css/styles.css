@@ -126,6 +126,11 @@ body{
   box-shadow:0 6px 18px rgba(10,10,10,0.06);
 }
 @media (max-width:1000px){ .gallery{column-count:2} }
+/* Ensure mobile menu button and overlay are hidden on desktop */
+@media (min-width:641px){
+  .mobile-menu-btn{display:none;}
+  .mobile-menu-overlay{display:none;}
+}
 @media (max-width:640px){ 
   .gallery{column-count:1;} 
   .hero{padding:28px 0;}
