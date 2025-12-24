@@ -120,69 +120,154 @@
       
       const galleryContainer = document.getElementById('gallery');
       
-      // Define work images with paths
-      // These can be easily replaced with actual images from bencorda.com or other sources
+      // Define work images with their file extensions
+      // Image extensions are mixed case (jpg, jpeg, JPG, JPEG)
       const workImages = [
-        { path: 'assets/images/work/work-001.svg', caption: 'Selected Work — Project 001' },
-        { path: 'assets/images/work/work-002.svg', caption: 'Selected Work — Project 002' },
-        { path: 'assets/images/work/work-003.svg', caption: 'Selected Work — Project 003' },
-        { path: 'assets/images/work/work-004.svg', caption: 'Selected Work — Project 004' },
-        { path: 'assets/images/work/work-005.svg', caption: 'Selected Work — Project 005' },
-        { path: 'assets/images/work/work-006.svg', caption: 'Selected Work — Project 006' },
-        { path: 'assets/images/work/work-007.svg', caption: 'Selected Work — Project 007' },
-        { path: 'assets/images/work/work-008.svg', caption: 'Selected Work — Project 008' }
+        { id: '00001', ext: 'jpeg', caption: 'Selected Work — Project 001' },
+        { id: '00002', ext: 'jpg', caption: 'Selected Work — Project 002' },
+        { id: '00003', ext: 'jpeg', caption: 'Selected Work — Project 003' },
+        { id: '00004', ext: 'JPG', caption: 'Selected Work — Project 004' },
+        { id: '00005', ext: 'JPG', caption: 'Selected Work — Project 005' },
+        { id: '00006', ext: 'JPG', caption: 'Selected Work — Project 006' },
+        { id: '00007', ext: 'JPG', caption: 'Selected Work — Project 007' },
+        { id: '00008', ext: 'JPG', caption: 'Selected Work — Project 008' },
+        { id: '00009', ext: 'jpg', caption: 'Selected Work — Project 009' },
+        { id: '00010', ext: 'JPG', caption: 'Selected Work — Project 010' },
+        { id: '00011', ext: 'jpg', caption: 'Selected Work — Project 011' },
+        { id: '00012', ext: 'jpg', caption: 'Selected Work — Project 012' },
+        { id: '00013', ext: 'JPG', caption: 'Selected Work — Project 013' },
+        { id: '00014', ext: 'JPG', caption: 'Selected Work — Project 014' },
+        { id: '00015', ext: 'JPG', caption: 'Selected Work — Project 015' },
+        { id: '00016', ext: 'JPG', caption: 'Selected Work — Project 016' }
       ];
       
-      // Create gallery items
+      // Create gallery items with thumbnail fallback to full-size
       workImages.forEach(function(work) {
+        const fullSizePath = 'assets/images/work/work-' + work.id + '.' + work.ext;
+        const thumbPath = 'assets/images/work/thumbs/work-' + work.id + '.' + work.ext;
+        
         const anchor = document.createElement('a');
-        anchor.href = work.path;
+        anchor.href = fullSizePath;
         anchor.className = 'gallery-item loading';
         anchor.setAttribute('data-caption', work.caption);
         
         const img = document.createElement('img');
-        img.src = work.path;
         img.alt = work.caption;
         img.loading = 'lazy';
+        
+        // Try loading thumbnail first, fallback to full-size if thumbnail doesn't exist
+        img.src = thumbPath;
+        
+        var thumbnailFailed = false;
         
         // Handle successful image load
         img.addEventListener('load', function() {
           anchor.classList.remove('loading');
         });
         
-        // Handle image load errors with fallback
+        // Handle image load errors with fallback to full-size image
         img.addEventListener('error', function() {
-          anchor.classList.add('error');
-          console.warn('Failed to load image:', work.path);
+          if (!thumbnailFailed) {
+            thumbnailFailed = true;
+            // Fallback to full-size image
+            img.src = fullSizePath;
+          } else {
+            // Both thumbnail and full-size failed
+            anchor.classList.add('error');
+            console.warn('Failed to load image:', fullSizePath);
+          }
         });
         
         anchor.appendChild(img);
         galleryContainer.appendChild(anchor);
       });
       
-      // Attach lightbox handlers to dynamically created items.
-      // main.js is loaded synchronously before this script and has already initialized the lightbox.
+      // Attach lightbox handlers to dynamically created items
+      // main.js provides __site_gallery_handler for gallery items
+      // If not available, implement a lightweight fallback modal
       var items = document.querySelectorAll('#gallery a.gallery-item');
-      for (var i = 0; i < items.length; i++) {
-        // Use IIFE to create proper closure for each item
-        (function(item) {
-          item.addEventListener('click', function(e) {
-            e.preventDefault();
-            var href = item.getAttribute('href') || item.dataset.href;
-            if (!href) return;
-            var caption = item.getAttribute('data-caption') || item.getAttribute('title') || '';
-            // Access the lightbox created by main.js
-            var lb = document.getElementById('simple-lightbox');
-            if (lb) {
-              var img = lb.querySelector('#slb-img');
-              var cap = lb.querySelector('#slb-caption');
-              img.src = href;
-              cap.textContent = caption;
-              lb.style.display = 'flex';
-              document.body.style.overflow = 'hidden';
+      
+      if (window.__site_gallery_handler) {
+        // Use the handler provided by main.js
+        for (var i = 0; i < items.length; i++) {
+          items[i].addEventListener('click', window.__site_gallery_handler);
+        }
+      } else if (!window.__site_lightbox_installed) {
+        // Lightweight fallback modal if no gallery library is initialized
+        var currentIndex = 0;
+        var galleryItems = Array.from(items);
+        
+        function showModal(index) {
+          if (index < 0 || index >= galleryItems.length) return;
+          currentIndex = index;
+          var item = galleryItems[index];
+          var href = item.getAttribute('href');
+          var caption = item.getAttribute('data-caption') || '';
+          
+          var lightbox = document.getElementById('lightbox');
+          var img = lightbox.querySelector('.lightbox-image');
+          var cap = lightbox.querySelector('.lightbox-caption');
+          
+          img.src = href;
+          img.alt = caption;
+          cap.textContent = caption;
+          lightbox.setAttribute('aria-hidden', 'false');
+          lightbox.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+          var lightbox = document.getElementById('lightbox');
+          lightbox.setAttribute('aria-hidden', 'true');
+          lightbox.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+        
+        function showNext() {
+          if (currentIndex < galleryItems.length - 1) {
+            showModal(currentIndex + 1);
+          }
+        }
+        
+        function showPrev() {
+          if (currentIndex > 0) {
+            showModal(currentIndex - 1);
+          }
+        }
+        
+        // Attach click handlers to gallery items
+        for (var i = 0; i < items.length; i++) {
+          (function(index) {
+            items[index].addEventListener('click', function(e) {
+              e.preventDefault();
+              showModal(index);
+            });
+          })(i);
+        }
+        
+        // Attach modal control handlers
+        var lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+          var closeBtn = lightbox.querySelector('.lightbox-close');
+          var nextBtn = lightbox.querySelector('.lightbox-next');
+          var prevBtn = lightbox.querySelector('.lightbox-prev');
+          
+          if (closeBtn) closeBtn.addEventListener('click', closeModal);
+          if (nextBtn) nextBtn.addEventListener('click', showNext);
+          if (prevBtn) prevBtn.addEventListener('click', showPrev);
+          
+          lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) closeModal();
+          });
+          
+          document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === 'flex') {
+              if (e.key === 'Escape') closeModal();
+              else if (e.key === 'ArrowRight') showNext();
+              else if (e.key === 'ArrowLeft') showPrev();
             }
           });
-        })(items[i]);
+        }
       }
     })();
   </script>
