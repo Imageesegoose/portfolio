@@ -76,9 +76,6 @@
 
   const lightbox = createLightbox();
   window.__site_lightbox_installed = true;
-  
-  // Expose gallery click handler for dynamically added items
-  window.__site_lightbox = lightbox;
 
   // attach click handlers
   function onGalleryClick(e) {
