@@ -177,6 +177,27 @@
       
       // If global gallery initializer is present, don't attach fallback
       if (window.__gallery_initialized || window.__site_lightbox_installed) return;
+      // Define work images with paths (work-00001 through work-00016)
+      // Thumbnail convention: assets/images/work/thumbs/work-00001.jpg (if present)
+      // If thumbnail doesn't exist, img.onerror will fallback to full-size image
+      const workImages = [
+        { path: 'assets/images/work/work-00001.jpeg', thumb: 'assets/images/work/thumbs/work-00001.jpeg', caption: 'Work 00001' },
+        { path: 'assets/images/work/work-00002.jpg', thumb: 'assets/images/work/thumbs/work-00002.jpg', caption: 'Work 00002' },
+        { path: 'assets/images/work/work-00003.jpeg', thumb: 'assets/images/work/thumbs/work-00003.jpeg', caption: 'Work 00003' },
+        { path: 'assets/images/work/work-00004.JPG', thumb: 'assets/images/work/thumbs/work-00004.JPG', caption: 'Work 00004' },
+        { path: 'assets/images/work/work-00005.JPG', thumb: 'assets/images/work/thumbs/work-00005.JPG', caption: 'Work 00005' },
+        { path: 'assets/images/work/work-00006.JPG', thumb: 'assets/images/work/thumbs/work-00006.JPG', caption: 'Work 00006' },
+        { path: 'assets/images/work/work-00007.JPG', thumb: 'assets/images/work/thumbs/work-00007.JPG', caption: 'Work 00007' },
+        { path: 'assets/images/work/work-00008.JPG', thumb: 'assets/images/work/thumbs/work-00008.JPG', caption: 'Work 00008' },
+        { path: 'assets/images/work/work-00009.jpg', thumb: 'assets/images/work/thumbs/work-00009.jpg', caption: 'Work 00009' },
+        { path: 'assets/images/work/work-00010.JPG', thumb: 'assets/images/work/thumbs/work-00010.JPG', caption: 'Work 00010' },
+        { path: 'assets/images/work/work-00011.jpg', thumb: 'assets/images/work/thumbs/work-00011.jpg', caption: 'Work 00011' },
+        { path: 'assets/images/work/work-00012.jpg', thumb: 'assets/images/work/thumbs/work-00012.jpg', caption: 'Work 00012' },
+        { path: 'assets/images/work/work-00013.JPG', thumb: 'assets/images/work/thumbs/work-00013.JPG', caption: 'Work 00013' },
+        { path: 'assets/images/work/work-00014.JPG', thumb: 'assets/images/work/thumbs/work-00014.JPG', caption: 'Work 00014' },
+        { path: 'assets/images/work/work-00015.JPG', thumb: 'assets/images/work/thumbs/work-00015.JPG', caption: 'Work 00015' },
+        { path: 'assets/images/work/work-00016.JPG', thumb: 'assets/images/work/thumbs/work-00016.JPG', caption: 'Work 00016' }
+      ];
       
       // Create a simple modal lightbox as fallback
       function createFallbackLightbox() {
@@ -189,6 +210,10 @@
         var img = modal.querySelector('#fb-img');
         var caption = modal.querySelector('#fb-caption');
         var closeBtn = modal.querySelector('#fb-close');
+        const img = document.createElement('img');
+        img.src = work.thumb;
+        img.alt = work.caption;
+        img.loading = 'lazy';
         
         function open(src, text) {
           img.src = src;
@@ -206,6 +231,14 @@
         closeBtn.addEventListener('click', close);
         modal.addEventListener('click', function(e) {
           if (e.target === modal) close();
+        // Fallback to full-size image if thumbnail doesn't exist
+        img.addEventListener('error', function() {
+          if (img.src !== work.path) {
+            img.src = work.path;
+          } else {
+            anchor.classList.add('error');
+            console.warn('Failed to load image:', work.path);
+          }
         });
         
         return { open: open, close: close };
@@ -228,6 +261,12 @@
       } catch (e) {
         // Defensive: don't break other scripts
         console.error('Fallback lightbox error:', e);
+      // Attach lightbox handlers to dynamically created items using the handler from main.js
+      if (window.__site_gallery_handler) {
+        var items = document.querySelectorAll('#gallery a.gallery-item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].addEventListener('click', window.__site_gallery_handler);
+        }
       }
     })();
   </script>
