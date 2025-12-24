@@ -11,6 +11,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
   <!-- site CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Portfolio gallery - enhanced masonry grid (matching Adventure page) */
+    .portfolio .gallery {
+      column-gap: var(--gap);
+      column-count: 3;
+    }
+    .portfolio .gallery-item {
+      display: inline-block;
+      width: 100%;
+      margin: 0 0 var(--gap);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      break-inside: avoid;
+      position: relative;
+    }
+    .portfolio .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .portfolio .gallery-item:hover img,
+    .portfolio .gallery-item:focus img {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(10,10,10,0.12);
+    }
+    .portfolio .gallery-item.loading img {
+      opacity: 0.6;
+    }
+    .portfolio .gallery-item.error {
+      display: none;
+    }
+    @media (max-width:1000px) { 
+      .portfolio .gallery { column-count: 2; } 
+    }
+    @media (max-width:640px) { 
+      .portfolio .gallery { column-count: 1; } 
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -41,26 +83,8 @@
 
     <section id="portfolio" class="wrap portfolio">
       <h3>Selected Work</h3>
-      <div class="gallery" id="gallery">
-        <!-- Replace these with your images in assets/images/ or use raw GitHub URLs -->
-        <a href="assets/images/placeholder1.svg" data-caption="Project — Studio Portraits" class="gallery-item">
-          <img src="assets/images/placeholder1.svg" alt="Project — Studio Portraits" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder2.svg" data-caption="Project — Editorial Series" class="gallery-item">
-          <img src="assets/images/placeholder2.svg" alt="Project — Editorial Series" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder3.svg" data-caption="Project — Campaign" class="gallery-item">
-          <img src="assets/images/placeholder3.svg" alt="Project — Campaign" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder4.svg" data-caption="Project — Landscape" class="gallery-item">
-          <img src="assets/images/placeholder4.svg" alt="Project — Landscape" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder5.svg" data-caption="Project — Still Life" class="gallery-item">
-          <img src="assets/images/placeholder5.svg" alt="Project — Still Life" loading="lazy">
-        </a>
-        <a href="assets/images/placeholder6.svg" data-caption="Project — Concept Series" class="gallery-item">
-          <img src="assets/images/placeholder6.svg" alt="Project — Concept Series" loading="lazy">
-        </a>
+      <div class="gallery" id="gallery" aria-label="Gallery of selected work">
+        <!-- Images will be dynamically loaded here -->
       </div>
     </section>
 
@@ -90,5 +114,76 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      
+      const galleryContainer = document.getElementById('gallery');
+      
+      // Define work images with paths
+      // These can be easily replaced with actual images from bencorda.com or other sources
+      const workImages = [
+        { path: 'assets/images/work/work-001.svg', caption: 'Selected Work — Project 001' },
+        { path: 'assets/images/work/work-002.svg', caption: 'Selected Work — Project 002' },
+        { path: 'assets/images/work/work-003.svg', caption: 'Selected Work — Project 003' },
+        { path: 'assets/images/work/work-004.svg', caption: 'Selected Work — Project 004' },
+        { path: 'assets/images/work/work-005.svg', caption: 'Selected Work — Project 005' },
+        { path: 'assets/images/work/work-006.svg', caption: 'Selected Work — Project 006' },
+        { path: 'assets/images/work/work-007.svg', caption: 'Selected Work — Project 007' },
+        { path: 'assets/images/work/work-008.svg', caption: 'Selected Work — Project 008' }
+      ];
+      
+      // Create gallery items
+      workImages.forEach(function(work, index) {
+        const anchor = document.createElement('a');
+        anchor.href = work.path;
+        anchor.className = 'gallery-item loading';
+        anchor.setAttribute('data-caption', work.caption);
+        
+        const img = document.createElement('img');
+        img.src = work.path;
+        img.alt = work.caption;
+        img.loading = 'lazy';
+        
+        // Handle successful image load
+        img.addEventListener('load', function() {
+          anchor.classList.remove('loading');
+        });
+        
+        // Handle image load errors with fallback
+        img.addEventListener('error', function() {
+          anchor.classList.add('error');
+          console.warn('Failed to load image:', work.path);
+        });
+        
+        anchor.appendChild(img);
+        galleryContainer.appendChild(anchor);
+      });
+      
+      // Attach lightbox click handlers (main.js lightbox will handle these)
+      setTimeout(function() {
+        var items = document.querySelectorAll('#gallery a.gallery-item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].addEventListener('click', function(e) {
+            e.preventDefault();
+            var href = this.getAttribute('href');
+            var caption = this.getAttribute('data-caption') || '';
+            if (window.__site_lightbox_installed && window.lightbox) {
+              // Use main.js lightbox if available
+              var lb = document.getElementById('simple-lightbox');
+              if (lb) {
+                var img = lb.querySelector('#slb-img');
+                var cap = lb.querySelector('#slb-caption');
+                img.src = href;
+                cap.textContent = caption;
+                lb.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+              }
+            }
+          });
+        }
+      }, 100);
+    })();
+  </script>
 </body>
 </html>
