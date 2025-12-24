@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adventure</title>
-  <meta name="description" content="Adventure photography gallery showcasing travel and exploration." />
+  <title>Publications</title>
+  <meta name="description" content="Publications photography gallery showcasing published works and editorial photography." />
   <!-- Google Font: Major Mono Display (loaded before CSS) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,12 +43,12 @@
 
   <main>
     <section class="hero wrap">
-      <h2>Adventure Gallery</h2>
-      <p class="lead">A collection of moments captured while exploring the world.</p>
+      <h2>Publications Gallery</h2>
+      <p class="lead">A collection of published works and editorial photography.</p>
     </section>
 
     <section class="wrap">
-      <div class="adventure-gallery" id="adventure-gallery" aria-label="Gallery of adventure images">
+      <div class="gallery-grid" id="adventure-gallery" aria-label="Gallery of publication images">
         <!-- Images will be dynamically loaded here -->
       </div>
     </section>
@@ -69,39 +69,29 @@
       'use strict';
       
       const galleryContainer = document.getElementById('adventure-gallery');
-      const imageCount = 28;
-      const imagePaths = [];
       
-      // Build list of adventure image paths with proper extensions
+      // Build list of publications image paths with proper extensions
       const imageExtensions = [
-        { num: 1, ext: 'jpeg' },
+        { num: 1, ext: 'jpg' },
         { num: 2, ext: 'jpg' },
-        { num: 3, ext: 'JPG' },
-        { num: 4, ext: 'jpg' },
-        { num: 5, ext: 'JPG' },
-        { num: 6, ext: 'JPG' },
-        { num: 7, ext: 'JPG' },
-        { num: 8, ext: 'JPG' },
-        { num: 9, ext: 'JPG' },
-        { num: 10, ext: 'JPG' },
-        { num: 11, ext: 'JPG' },
-        { num: 12, ext: 'jpg' },
-        { num: 13, ext: 'JPG' },
-        { num: 14, ext: 'jpg' },
-        { num: 15, ext: 'jpg' },
-        { num: 16, ext: 'jpg' },
-        { num: 17, ext: 'JPG' },
-        { num: 18, ext: 'JPG' },
-        { num: 19, ext: 'JPG' },
-        { num: 20, ext: 'JPG' },
-        { num: 21, ext: 'jpg' },
-        { num: 22, ext: 'JPG' },
-        { num: 23, ext: 'JPG' },
-        { num: 24, ext: 'jpg' },
-        { num: 25, ext: 'JPG' },
-        { num: 26, ext: 'JPG' },
-        { num: 27, ext: 'JPG' },
-        { num: 28, ext: 'jpg' }
+        { num: 3, ext: 'png' },
+        { num: 4, ext: 'png' },
+        { num: 5, ext: 'png' },
+        { num: 6, ext: 'png' },
+        { num: 7, ext: 'png' },
+        { num: 8, ext: 'png' },
+        { num: 9, ext: 'png' },
+        lb.id = 'gallery-lightbox';
+        { num: 11, ext: 'png' },
+        { num: 12, ext: 'png' },
+        { num: 13, ext: 'png' },
+        { num: 14, ext: 'png' },
+        { num: 15, ext: 'png' },
+        { num: 16, ext: 'png' },
+        { num: 17, ext: 'png' },
+        { num: 18, ext: 'png' },
+        { num: 19, ext: 'png' },
+        { num: 20, ext: 'png' }
       ];
       
       // Create inline lightbox for dynamically loaded images
@@ -150,16 +140,16 @@
       // Create gallery items
       imageExtensions.forEach(function(imgInfo) {
         const numStr = String(imgInfo.num).padStart(5, '0');
-        const imgPath = 'assets/images/adventure/adventure-' + numStr + '.' + imgInfo.ext;
+        const imgPath = 'assets/images/publications/pubs-' + numStr + '.' + imgInfo.ext;
         
         const anchor = document.createElement('a');
         anchor.href = imgPath;
         anchor.className = 'gallery-item loading';
-        anchor.setAttribute('data-caption', 'Adventure ' + imgInfo.num);
+        anchor.setAttribute('data-caption', 'Publications ' + imgInfo.num);
         
         const img = document.createElement('img');
         img.src = imgPath;
-        img.alt = 'Adventure ' + imgInfo.num;
+        img.alt = 'Publications ' + imgInfo.num;
         img.loading = 'lazy';
         
         // Handle successful image load

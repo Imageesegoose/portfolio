@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Adventure</title>
-  <meta name="description" content="Adventure photography gallery showcasing travel and exploration." />
+  <title>Faces</title>
+  <meta name="description" content="Faces photography gallery showcasing portraits and expressions." />
   <!-- Google Font: Major Mono Display (loaded before CSS) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,12 +43,12 @@
 
   <main>
     <section class="hero wrap">
-      <h2>Adventure Gallery</h2>
-      <p class="lead">A collection of moments captured while exploring the world.</p>
+      <h2>Faces Gallery</h2>
+      <p class="lead">A collection of expressive faces and candid moments.</p>
     </section>
 
     <section class="wrap">
-      <div class="adventure-gallery" id="adventure-gallery" aria-label="Gallery of adventure images">
+      <div class="gallery-grid" id="adventure-gallery" aria-label="Gallery of faces images">
         <!-- Images will be dynamically loaded here -->
       </div>
     </section>
@@ -69,39 +69,27 @@
       'use strict';
       
       const galleryContainer = document.getElementById('adventure-gallery');
-      const imageCount = 28;
-      const imagePaths = [];
       
-      // Build list of adventure image paths with proper extensions
+      // Build list of faces image paths with proper extensions
       const imageExtensions = [
-        { num: 1, ext: 'jpeg' },
-        { num: 2, ext: 'jpg' },
+        { num: 1, ext: 'jpg' },
+        { num: 2, ext: 'JPG' },
         { num: 3, ext: 'JPG' },
         { num: 4, ext: 'jpg' },
         { num: 5, ext: 'JPG' },
         { num: 6, ext: 'JPG' },
         { num: 7, ext: 'JPG' },
-        { num: 8, ext: 'JPG' },
+        { num: 8, ext: 'jpg' },
         { num: 9, ext: 'JPG' },
         { num: 10, ext: 'JPG' },
         { num: 11, ext: 'JPG' },
-        { num: 12, ext: 'jpg' },
+        { num: 12, ext: 'jpeg' },
         { num: 13, ext: 'JPG' },
         { num: 14, ext: 'jpg' },
         { num: 15, ext: 'jpg' },
         { num: 16, ext: 'jpg' },
         { num: 17, ext: 'JPG' },
-        { num: 18, ext: 'JPG' },
-        { num: 19, ext: 'JPG' },
-        { num: 20, ext: 'JPG' },
-        { num: 21, ext: 'jpg' },
-        { num: 22, ext: 'JPG' },
-        { num: 23, ext: 'JPG' },
-        { num: 24, ext: 'jpg' },
-        { num: 25, ext: 'JPG' },
-        { num: 26, ext: 'JPG' },
-        { num: 27, ext: 'JPG' },
-        { num: 28, ext: 'jpg' }
+        { num: 18, ext: 'jpg' }
       ];
       
       // Create inline lightbox for dynamically loaded images
@@ -109,7 +97,7 @@
         if (window.__adventure_lightbox) return window.__adventure_lightbox;
         
         const lb = document.createElement('div');
-        lb.id = 'adventure-lightbox';
+        lb.id = 'gallery-lightbox';
         lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:24px;';
         lb.innerHTML = '<button id="alb-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:36px;color:#fff;background:none;border:0;cursor:pointer;padding:12px;">×</button><img id="alb-img" style="max-width:90%;max-height:80%;object-fit:contain;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,0.6);"><div id="alb-caption" style="color:#eee;margin-top:12px;text-align:center;"></div>';
         document.body.appendChild(lb);
@@ -150,16 +138,16 @@
       // Create gallery items
       imageExtensions.forEach(function(imgInfo) {
         const numStr = String(imgInfo.num).padStart(5, '0');
-        const imgPath = 'assets/images/adventure/adventure-' + numStr + '.' + imgInfo.ext;
+        const imgPath = 'assets/images/faces/faces-' + numStr + '.' + imgInfo.ext;
         
         const anchor = document.createElement('a');
         anchor.href = imgPath;
         anchor.className = 'gallery-item loading';
-        anchor.setAttribute('data-caption', 'Adventure ' + imgInfo.num);
+        anchor.setAttribute('data-caption', 'Faces ' + imgInfo.num);
         
         const img = document.createElement('img');
         img.src = imgPath;
-        img.alt = 'Adventure ' + imgInfo.num;
+        img.alt = 'Faces ' + imgInfo.num;
         img.loading = 'lazy';
         
         // Handle successful image load
