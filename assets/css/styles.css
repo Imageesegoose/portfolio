@@ -128,8 +128,8 @@ body{
 @media (max-width:1000px){ .gallery{column-count:2} }
 /* Ensure mobile menu button and overlay are hidden on desktop */
 @media (min-width:641px){
-  .mobile-menu-btn{display:none !important;}
-  .mobile-menu-overlay{display:none !important;}
+  .mobile-menu-btn{display:none;}
+  .mobile-menu-overlay{display:none;}
 }
 @media (max-width:640px){ 
   .gallery{column-count:1;} 
