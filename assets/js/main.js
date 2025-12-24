@@ -100,4 +100,70 @@
   } catch (e) {
     /* ignore */
   }
+
+  // Desktop-only navigation tooltips
+  var MOBILE_BREAKPOINT = 640;
+  var tooltipsInitialized = false;
+
+  function initNavTooltips() {
+    // Only add tooltips on desktop (min-width: 641px)
+    if (window.innerWidth <= MOBILE_BREAKPOINT) return;
+
+    // Avoid duplicate initialization
+    if (tooltipsInitialized) return;
+
+    var navLinks = document.querySelectorAll('.site-nav a');
+    
+    navLinks.forEach(function(link) {
+      // Create tooltip element
+      var tooltip = document.createElement('span');
+      tooltip.className = 'nav-tooltip';
+      tooltip.textContent = 'Have fun!';
+      link.appendChild(tooltip);
+
+      // Show tooltip on mouseenter
+      link.addEventListener('mouseenter', function() {
+        if (window.innerWidth > MOBILE_BREAKPOINT) {
+          tooltip.classList.add('show');
+        }
+      });
+
+      // Hide tooltip on mouseleave
+      link.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+      });
+    });
+
+    tooltipsInitialized = true;
+  }
+
+  function removeNavTooltips() {
+    var existingTooltips = document.querySelectorAll('.nav-tooltip');
+    existingTooltips.forEach(function(tooltip) {
+      tooltip.remove();
+    });
+    tooltipsInitialized = false;
+  }
+
+  // Initialize tooltips after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavTooltips);
+  } else {
+    initNavTooltips();
+  }
+
+  // Re-check on window resize to handle orientation changes
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        // Remove tooltips when switching to mobile
+        removeNavTooltips();
+      } else if (!tooltipsInitialized) {
+        // Re-add tooltips when switching back to desktop
+        initNavTooltips();
+      }
+    }, 250);
+  });
 })();
