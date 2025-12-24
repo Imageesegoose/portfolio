@@ -204,3 +204,51 @@ body{
 
 /* Quick tweaks for captions / bio */
 .bio{ max-width:68ch; color:var(--muted); }
+
+/* Adventure-specific styles for masonry grid */
+.adventure-gallery {
+  column-gap: var(--gap);
+  column-count: 3;
+}
+.adventure-gallery .gallery-item {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 var(--gap);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  break-inside: avoid;
+  position: relative;
+}
+.adventure-gallery .gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.adventure-gallery .gallery-item:hover img,
+.adventure-gallery .gallery-item:focus img {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(10,10,10,0.12);
+}
+.adventure-gallery .gallery-item.loading img {
+  opacity: 0.6;
+}
+.adventure-gallery .gallery-item.error {
+  display: none;
+}
+@media (max-width:1000px) { 
+  .adventure-gallery { column-count: 2; } 
+}
+@media (max-width:640px) { 
+  .adventure-gallery { column-count: 1; } 
+}
+
+/* Gallery-test specific styles */
+.gallery-test .lead { margin-bottom: 1rem; color: #444; }
+.gallery-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; margin-top:1rem; }
+.gallery-grid .gallery-item { display:block; background:#f7f7f7; border-radius:6px; overflow:hidden; text-decoration:none; color:inherit; }
+.gallery-grid .gallery-item img { width:100%; height: auto; display:block; }
+.gallery-note { font-size:0.95rem; color:#666; margin-top:0.25rem; }

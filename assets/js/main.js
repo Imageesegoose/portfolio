@@ -3,9 +3,9 @@
 
   // Mobile menu toggle
   (function initMobileMenu() {
-    var menuBtn = document.getElementById('mobile-menu-btn');
-    var nav = document.getElementById('site-nav');
-    var overlay = document.getElementById('mobile-menu-overlay');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const nav = document.getElementById('site-nav');
+    const overlay = document.getElementById('mobile-menu-overlay');
     
     if (!menuBtn || !nav || !overlay) return;
     
@@ -25,15 +25,15 @@
     overlay.addEventListener('click', closeMenu);
     
     // Close menu when clicking nav links
-    var navLinks = nav.querySelectorAll('a');
-    for (var i = 0; i < navLinks.length; i++) {
-      navLinks[i].addEventListener('click', closeMenu);
-    }
+    const navLinks = nav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
   })();
 
   // footer year
   try {
-    var yEl = document.getElementById('year');
+    const yEl = document.getElementById('year');
     if (yEl) yEl.textContent = new Date().getFullYear();
   } catch (e) {
     /* ignore */
@@ -42,17 +42,17 @@
   // If a site lightbox already initializes, do nothing else.
   if (window.__site_lightbox_installed) return;
 
-  // Lightweight lightbox fallback for anchors with class "gallery-item"
+  // Lightweight lightbox for anchors with class "gallery-item"
   function createLightbox() {
-    var lb = document.createElement('div');
+    const lb = document.createElement('div');
     lb.id = 'simple-lightbox';
     lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:1200;';
     lb.innerHTML = '<button id="slb-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:28px;color:#fff;background:none;border:0;cursor:pointer">×</button><img id="slb-img" style="max-width:92%;max-height:92%;box-shadow:0 8px 30px rgba(0,0,0,0.6)"><div id="slb-caption" style="color:#fff;margin-top:12px;text-align:center;max-width:90%"></div>';
     document.body.appendChild(lb);
 
-    var img = lb.querySelector('#slb-img');
-    var caption = lb.querySelector('#slb-caption');
-    var closeBtn = lb.querySelector('#slb-close');
+    const img = lb.querySelector('#slb-img');
+    const caption = lb.querySelector('#slb-caption');
+    const closeBtn = lb.querySelector('#slb-close');
 
     function open(src, text) {
       img.src = src;
@@ -74,26 +74,32 @@
     return { open: open, close: close };
   }
 
-  var lightbox = createLightbox();
+  const lightbox = createLightbox();
   window.__site_lightbox_installed = true;
+  
+  // Expose gallery click handler for dynamically added items
+  window.__site_lightbox = lightbox;
 
   // attach click handlers
   function onGalleryClick(e) {
-    var a = e.currentTarget;
-    var href = a.getAttribute('href') || a.dataset.href;
+    const a = e.currentTarget;
+    const href = a.getAttribute('href') || a.dataset.href;
     if (!href) return;
     e.preventDefault();
-    var caption = a.getAttribute('data-caption') || a.getAttribute('title') || '';
+    const caption = a.getAttribute('data-caption') || a.getAttribute('title') || '';
     lightbox.open(href, caption);
   }
+  
+  // Expose for dynamic gallery items
+  window.__site_gallery_handler = onGalleryClick;
 
   try {
-    var items = document.querySelectorAll('a.gallery-item');
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener('click', onGalleryClick);
-      var im = items[i].querySelector('img');
-      if (im && !im.getAttribute('loading')) im.setAttribute('loading', 'lazy');
-    }
+    const items = document.querySelectorAll('a.gallery-item');
+    items.forEach(item => {
+      item.addEventListener('click', onGalleryClick);
+      const img = item.querySelector('img');
+      if (img && !img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+    });
   } catch (e) {
     /* ignore */
   }
