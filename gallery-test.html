@@ -137,6 +137,8 @@
         root.querySelectorAll('a.gallery-item').forEach(item => {
           item.addEventListener('click', window.__site_gallery_handler);
         });
+      } else {
+        console.warn('[gallery-test] Lightbox handler not available from main.js');
       }
     }
 
