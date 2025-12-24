@@ -6,7 +6,7 @@
     const toggle = document.getElementById("dark-mode-toggle");
     if (!toggle) return;
 
-    const userPreferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const storedMode = localStorage.getItem("theme");
 
     // Apply stored preference or OS preference
@@ -14,7 +14,7 @@
       const isDark = storedMode === "dark";
       document.body.classList.toggle("dark-mode", isDark);
       toggle.checked = isDark;
-    } else if (userPreferredDark) {
+    } else if (darkModeMediaQuery.matches) {
       document.body.classList.add("dark-mode");
       toggle.checked = true;
     }
@@ -24,6 +24,14 @@
       const enableDark = toggle.checked;
       document.body.classList.toggle("dark-mode", enableDark);
       localStorage.setItem("theme", enableDark ? "dark" : "light");
+    });
+
+    // Listen for OS preference changes (only if user hasn't manually set preference)
+    darkModeMediaQuery.addEventListener("change", function(e) {
+      if (!localStorage.getItem("theme")) {
+        document.body.classList.toggle("dark-mode", e.matches);
+        toggle.checked = e.matches;
+      }
     });
   })();
 
