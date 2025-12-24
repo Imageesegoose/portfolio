@@ -120,17 +120,26 @@
       
       const galleryContainer = document.getElementById('gallery');
       
-      // Define work images with paths
-      // These can be easily replaced with actual images from bencorda.com or other sources
+      // Define work images with paths (work-00001 through work-00016)
+      // Thumbnail convention: assets/images/work/thumbs/work-00001.jpg (if present)
+      // If thumbnail doesn't exist, img.onerror will fallback to full-size image
       const workImages = [
-        { path: 'assets/images/work/work-001.svg', caption: 'Selected Work — Project 001' },
-        { path: 'assets/images/work/work-002.svg', caption: 'Selected Work — Project 002' },
-        { path: 'assets/images/work/work-003.svg', caption: 'Selected Work — Project 003' },
-        { path: 'assets/images/work/work-004.svg', caption: 'Selected Work — Project 004' },
-        { path: 'assets/images/work/work-005.svg', caption: 'Selected Work — Project 005' },
-        { path: 'assets/images/work/work-006.svg', caption: 'Selected Work — Project 006' },
-        { path: 'assets/images/work/work-007.svg', caption: 'Selected Work — Project 007' },
-        { path: 'assets/images/work/work-008.svg', caption: 'Selected Work — Project 008' }
+        { path: 'assets/images/work/work-00001.jpeg', thumb: 'assets/images/work/thumbs/work-00001.jpeg', caption: 'Work 00001' },
+        { path: 'assets/images/work/work-00002.jpg', thumb: 'assets/images/work/thumbs/work-00002.jpg', caption: 'Work 00002' },
+        { path: 'assets/images/work/work-00003.jpeg', thumb: 'assets/images/work/thumbs/work-00003.jpeg', caption: 'Work 00003' },
+        { path: 'assets/images/work/work-00004.JPG', thumb: 'assets/images/work/thumbs/work-00004.JPG', caption: 'Work 00004' },
+        { path: 'assets/images/work/work-00005.JPG', thumb: 'assets/images/work/thumbs/work-00005.JPG', caption: 'Work 00005' },
+        { path: 'assets/images/work/work-00006.JPG', thumb: 'assets/images/work/thumbs/work-00006.JPG', caption: 'Work 00006' },
+        { path: 'assets/images/work/work-00007.JPG', thumb: 'assets/images/work/thumbs/work-00007.JPG', caption: 'Work 00007' },
+        { path: 'assets/images/work/work-00008.JPG', thumb: 'assets/images/work/thumbs/work-00008.JPG', caption: 'Work 00008' },
+        { path: 'assets/images/work/work-00009.jpg', thumb: 'assets/images/work/thumbs/work-00009.jpg', caption: 'Work 00009' },
+        { path: 'assets/images/work/work-00010.JPG', thumb: 'assets/images/work/thumbs/work-00010.JPG', caption: 'Work 00010' },
+        { path: 'assets/images/work/work-00011.jpg', thumb: 'assets/images/work/thumbs/work-00011.jpg', caption: 'Work 00011' },
+        { path: 'assets/images/work/work-00012.jpg', thumb: 'assets/images/work/thumbs/work-00012.jpg', caption: 'Work 00012' },
+        { path: 'assets/images/work/work-00013.JPG', thumb: 'assets/images/work/thumbs/work-00013.JPG', caption: 'Work 00013' },
+        { path: 'assets/images/work/work-00014.JPG', thumb: 'assets/images/work/thumbs/work-00014.JPG', caption: 'Work 00014' },
+        { path: 'assets/images/work/work-00015.JPG', thumb: 'assets/images/work/thumbs/work-00015.JPG', caption: 'Work 00015' },
+        { path: 'assets/images/work/work-00016.JPG', thumb: 'assets/images/work/thumbs/work-00016.JPG', caption: 'Work 00016' }
       ];
       
       // Create gallery items
@@ -141,7 +150,7 @@
         anchor.setAttribute('data-caption', work.caption);
         
         const img = document.createElement('img');
-        img.src = work.path;
+        img.src = work.thumb;
         img.alt = work.caption;
         img.loading = 'lazy';
         
@@ -150,39 +159,26 @@
           anchor.classList.remove('loading');
         });
         
-        // Handle image load errors with fallback
+        // Fallback to full-size image if thumbnail doesn't exist
         img.addEventListener('error', function() {
-          anchor.classList.add('error');
-          console.warn('Failed to load image:', work.path);
+          if (img.src !== work.path) {
+            img.src = work.path;
+          } else {
+            anchor.classList.add('error');
+            console.warn('Failed to load image:', work.path);
+          }
         });
         
         anchor.appendChild(img);
         galleryContainer.appendChild(anchor);
       });
       
-      // Attach lightbox handlers to dynamically created items.
-      // main.js is loaded synchronously before this script and has already initialized the lightbox.
-      var items = document.querySelectorAll('#gallery a.gallery-item');
-      for (var i = 0; i < items.length; i++) {
-        // Use IIFE to create proper closure for each item
-        (function(item) {
-          item.addEventListener('click', function(e) {
-            e.preventDefault();
-            var href = item.getAttribute('href') || item.dataset.href;
-            if (!href) return;
-            var caption = item.getAttribute('data-caption') || item.getAttribute('title') || '';
-            // Access the lightbox created by main.js
-            var lb = document.getElementById('simple-lightbox');
-            if (lb) {
-              var img = lb.querySelector('#slb-img');
-              var cap = lb.querySelector('#slb-caption');
-              img.src = href;
-              cap.textContent = caption;
-              lb.style.display = 'flex';
-              document.body.style.overflow = 'hidden';
-            }
-          });
-        })(items[i]);
+      // Attach lightbox handlers to dynamically created items using the handler from main.js
+      if (window.__site_gallery_handler) {
+        var items = document.querySelectorAll('#gallery a.gallery-item');
+        for (var i = 0; i < items.length; i++) {
+          items[i].addEventListener('click', window.__site_gallery_handler);
+        }
       }
     })();
   </script>
