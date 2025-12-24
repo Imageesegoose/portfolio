@@ -8,12 +8,16 @@
 
     const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const storedMode = localStorage.getItem("theme");
-    const logoImg = document.querySelector('.logo');
+    
+    // Logo paths as constants
+    const LOGO_LIGHT = 'assets/images/logo.svg';
+    const LOGO_DARK = 'assets/images/logo-dark.svg';
 
     // Function to update logo based on dark mode state
     function updateLogo(isDark) {
+      const logoImg = document.querySelector('.logo');
       if (logoImg) {
-        logoImg.src = isDark ? 'assets/images/logo-dark.svg' : 'assets/images/logo.svg';
+        logoImg.src = isDark ? LOGO_DARK : LOGO_LIGHT;
       }
     }
 
