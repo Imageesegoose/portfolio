@@ -99,7 +99,7 @@
         if (window.__adventure_lightbox) return window.__adventure_lightbox;
         
         const lb = document.createElement('div');
-        lb.id = 'adventure-lightbox';
+        lb.id = 'gallery-lightbox';
         lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:24px;';
         lb.innerHTML = '<button id="alb-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:36px;color:#fff;background:none;border:0;cursor:pointer;padding:12px;">×</button><img id="alb-img" style="max-width:90%;max-height:80%;object-fit:contain;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,0.6);"><div id="alb-caption" style="color:#eee;margin-top:12px;text-align:center;"></div>';
         document.body.appendChild(lb);
