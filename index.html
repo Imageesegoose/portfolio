@@ -84,7 +84,59 @@
     <section id="home" class="wrap home">
       <h3>Selected Work</h3>
       <div class="gallery" id="gallery" aria-label="Gallery of selected work">
-        <!-- Images will be dynamically loaded here -->
+        <!-- 
+          Gallery items use thumbnail convention: assets/images/work/thumbs/work-XXXXX.jpg
+          If thumbnail doesn't exist, onerror fallback loads the full-size image from assets/images/work/work-XXXXX.jpg (with multi-extension fallback)
+          This allows progressive optimization: thumbnails can be added later without changing markup.
+        -->
+        <a class="gallery-item" href="assets/images/work/work-00001.jpeg" data-caption="Selected Work — Project 00001">
+          <img src="assets/images/work/thumbs/work-00001.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.jpeg')" alt="Selected Work — Project 00001" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00002.jpg" data-caption="Selected Work — Project 00002">
+          <img src="assets/images/work/thumbs/work-00002.jpg" onerror="this.onerror=null; this.src='assets/images/work/work-00002.jpg'" alt="Selected Work — Project 00002" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00003.jpeg" data-caption="Selected Work — Project 00003">
+          <img src="assets/images/work/thumbs/work-00003.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.jpeg')" alt="Selected Work — Project 00003" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00004.JPG" data-caption="Selected Work — Project 00004">
+          <img src="assets/images/work/thumbs/work-00004.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00004" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00005.JPG" data-caption="Selected Work — Project 00005">
+          <img src="assets/images/work/thumbs/work-00005.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00005" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00006.JPG" data-caption="Selected Work — Project 00006">
+          <img src="assets/images/work/thumbs/work-00006.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00006" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00007.JPG" data-caption="Selected Work — Project 00007">
+          <img src="assets/images/work/thumbs/work-00007.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00007" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00008.JPG" data-caption="Selected Work — Project 00008">
+          <img src="assets/images/work/thumbs/work-00008.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00008" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00009.jpg" data-caption="Selected Work — Project 00009">
+          <img src="assets/images/work/thumbs/work-00009.jpg" onerror="this.onerror=null; this.src='assets/images/work/work-00009.jpg'" alt="Selected Work — Project 00009" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00010.JPG" data-caption="Selected Work — Project 00010">
+          <img src="assets/images/work/thumbs/work-00010.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00010" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00011.jpg" data-caption="Selected Work — Project 00011">
+          <img src="assets/images/work/thumbs/work-00011.jpg" onerror="this.onerror=null; this.src='assets/images/work/work-00011.jpg'" alt="Selected Work — Project 00011" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00012.jpg" data-caption="Selected Work — Project 00012">
+          <img src="assets/images/work/thumbs/work-00012.jpg" onerror="this.onerror=null; this.src='assets/images/work/work-00012.jpg'" alt="Selected Work — Project 00012" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00013.JPG" data-caption="Selected Work — Project 00013">
+          <img src="assets/images/work/thumbs/work-00013.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00013" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00014.JPG" data-caption="Selected Work — Project 00014">
+          <img src="assets/images/work/thumbs/work-00014.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00014" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00015.JPG" data-caption="Selected Work — Project 00015">
+          <img src="assets/images/work/thumbs/work-00015.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00015" loading="lazy">
+        </a>
+        <a class="gallery-item" href="assets/images/work/work-00016.JPG" data-caption="Selected Work — Project 00016">
+          <img src="assets/images/work/thumbs/work-00016.jpg" onerror="this.onerror=null; this.src=this.src.replace('/thumbs/', '/').replace('.jpg', '.JPG')" alt="Selected Work — Project 00016" loading="lazy">
+        </a>
       </div>
     </section>
 
@@ -115,74 +167,67 @@
 
   <script src="assets/js/main.js"></script>
   <script>
+    // Fallback lightbox script for homepage (only runs if no external gallery library is present)
     (function() {
       'use strict';
       
-      const galleryContainer = document.getElementById('gallery');
+      // Only run on homepage (check if we're on a page with .home section)
+      var homeSection = document.querySelector('.home');
+      if (!homeSection) return;
       
-      // Define work images with paths
-      // These can be easily replaced with actual images from bencorda.com or other sources
-      const workImages = [
-        { path: 'assets/images/work/work-001.svg', caption: 'Selected Work — Project 001' },
-        { path: 'assets/images/work/work-002.svg', caption: 'Selected Work — Project 002' },
-        { path: 'assets/images/work/work-003.svg', caption: 'Selected Work — Project 003' },
-        { path: 'assets/images/work/work-004.svg', caption: 'Selected Work — Project 004' },
-        { path: 'assets/images/work/work-005.svg', caption: 'Selected Work — Project 005' },
-        { path: 'assets/images/work/work-006.svg', caption: 'Selected Work — Project 006' },
-        { path: 'assets/images/work/work-007.svg', caption: 'Selected Work — Project 007' },
-        { path: 'assets/images/work/work-008.svg', caption: 'Selected Work — Project 008' }
-      ];
+      // If global gallery initializer is present, don't attach fallback
+      if (window.__gallery_initialized || window.__site_lightbox_installed) return;
       
-      // Create gallery items
-      workImages.forEach(function(work) {
-        const anchor = document.createElement('a');
-        anchor.href = work.path;
-        anchor.className = 'gallery-item loading';
-        anchor.setAttribute('data-caption', work.caption);
+      // Create a simple modal lightbox as fallback
+      function createFallbackLightbox() {
+        var modal = document.createElement('div');
+        modal.id = 'fallback-lightbox';
+        modal.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;align-items:center;justify-content:center;';
+        modal.innerHTML = '<button id="fb-close" style="position:absolute;top:20px;right:20px;background:none;border:0;color:#fff;font-size:32px;cursor:pointer;z-index:10000;" aria-label="Close">×</button><img id="fb-img" style="max-width:90%;max-height:90%;box-shadow:0 10px 40px rgba(0,0,0,0.8);"><div id="fb-caption" style="position:absolute;bottom:30px;color:#fff;text-align:center;width:100%;padding:0 20px;"></div>';
+        document.body.appendChild(modal);
         
-        const img = document.createElement('img');
-        img.src = work.path;
-        img.alt = work.caption;
-        img.loading = 'lazy';
+        var img = modal.querySelector('#fb-img');
+        var caption = modal.querySelector('#fb-caption');
+        var closeBtn = modal.querySelector('#fb-close');
         
-        // Handle successful image load
-        img.addEventListener('load', function() {
-          anchor.classList.remove('loading');
+        function open(src, text) {
+          img.src = src;
+          caption.textContent = text || '';
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+        
+        function close() {
+          modal.style.display = 'none';
+          img.src = '';
+          document.body.style.overflow = '';
+        }
+        
+        closeBtn.addEventListener('click', close);
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) close();
         });
         
-        // Handle image load errors with fallback
-        img.addEventListener('error', function() {
-          anchor.classList.add('error');
-          console.warn('Failed to load image:', work.path);
-        });
-        
-        anchor.appendChild(img);
-        galleryContainer.appendChild(anchor);
-      });
+        return { open: open, close: close };
+      }
       
-      // Attach lightbox handlers to dynamically created items.
-      // main.js is loaded synchronously before this script and has already initialized the lightbox.
-      var items = document.querySelectorAll('#gallery a.gallery-item');
-      for (var i = 0; i < items.length; i++) {
-        // Use IIFE to create proper closure for each item
-        (function(item) {
+      // Initialize fallback lightbox
+      var lightbox = createFallbackLightbox();
+      
+      // Attach click handlers to gallery items
+      try {
+        var items = document.querySelectorAll('.home .gallery .gallery-item');
+        items.forEach(function(item) {
           item.addEventListener('click', function(e) {
             e.preventDefault();
-            var href = item.getAttribute('href') || item.dataset.href;
-            if (!href) return;
+            var href = item.getAttribute('href');
             var caption = item.getAttribute('data-caption') || item.getAttribute('title') || '';
-            // Access the lightbox created by main.js
-            var lb = document.getElementById('simple-lightbox');
-            if (lb) {
-              var img = lb.querySelector('#slb-img');
-              var cap = lb.querySelector('#slb-caption');
-              img.src = href;
-              cap.textContent = caption;
-              lb.style.display = 'flex';
-              document.body.style.overflow = 'hidden';
-            }
+            if (href) lightbox.open(href, caption);
           });
-        })(items[i]);
+        });
+      } catch (e) {
+        // Defensive: don't break other scripts
+        console.error('Fallback lightbox error:', e);
       }
     })();
   </script>
