@@ -8,15 +8,25 @@
 
     const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const storedMode = localStorage.getItem("theme");
+    const logoImg = document.querySelector('.logo');
+
+    // Function to update logo based on dark mode state
+    function updateLogo(isDark) {
+      if (logoImg) {
+        logoImg.src = isDark ? 'assets/images/logo-dark.svg' : 'assets/images/logo.svg';
+      }
+    }
 
     // Apply stored preference or OS preference
     if (storedMode) {
       const isDark = storedMode === "dark";
       document.body.classList.toggle("dark-mode", isDark);
       toggle.checked = isDark;
+      updateLogo(isDark);
     } else if (darkModeMediaQuery.matches) {
       document.body.classList.add("dark-mode");
       toggle.checked = true;
+      updateLogo(true);
     }
 
     // Toggle handler
@@ -24,6 +34,7 @@
       const enableDark = toggle.checked;
       document.body.classList.toggle("dark-mode", enableDark);
       localStorage.setItem("theme", enableDark ? "dark" : "light");
+      updateLogo(enableDark);
     });
 
     // Listen for OS preference changes (only if user hasn't manually set preference)
@@ -31,6 +42,7 @@
       if (!localStorage.getItem("theme")) {
         document.body.classList.toggle("dark-mode", e.matches);
         toggle.checked = e.matches;
+        updateLogo(e.matches);
       }
     });
   })();
