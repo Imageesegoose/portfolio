@@ -67,4 +67,54 @@
   } catch (e) {
     /* ignore */
   }
+
+  // Desktop-only navigation tooltips
+  function initNavTooltips() {
+    // Only add tooltips on desktop (min-width: 641px)
+    if (window.innerWidth <= 640) return;
+
+    var navLinks = document.querySelectorAll('.site-nav a');
+    
+    navLinks.forEach(function(link) {
+      // Create tooltip element
+      var tooltip = document.createElement('span');
+      tooltip.className = 'nav-tooltip';
+      tooltip.textContent = 'Have fun!';
+      link.appendChild(tooltip);
+
+      // Show tooltip on mouseenter
+      link.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 640) {
+          tooltip.classList.add('show');
+        }
+      });
+
+      // Hide tooltip on mouseleave
+      link.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+      });
+    });
+  }
+
+  // Initialize tooltips after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavTooltips);
+  } else {
+    initNavTooltips();
+  }
+
+  // Re-check on window resize to handle orientation changes
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      // Remove existing tooltips if switching to mobile
+      if (window.innerWidth <= 640) {
+        var existingTooltips = document.querySelectorAll('.nav-tooltip');
+        existingTooltips.forEach(function(tooltip) {
+          tooltip.remove();
+        });
+      }
+    }, 250);
+  });
 })();
