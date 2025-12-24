@@ -40,7 +40,7 @@ body{
   color:inherit;
 }
 .logo{
-  width:260px; /* adjust for your logo size */
+  width:325px; /* increased by 25% from 260px */
   height:auto;
   display:block;
   filter:none; /* ensure SVG is not recolored */
@@ -66,6 +66,54 @@ body{
   letter-spacing: 0.08em;
   font-size:14px;
   position:relative;
+}
+/* Dropdown container */
+.site-nav .dropdown{
+  position:relative;
+  display:inline-block;
+}
+/* Dropdown button styling - matches nav links */
+.site-nav .dropdown > a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:400;
+  font-family: var(--display-font);
+  letter-spacing: 0.08em;
+  font-size:14px;
+  cursor:pointer;
+}
+/* Dropdown content (hidden by default) */
+.site-nav .dropdown-content{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:var(--bg);
+  min-width:160px;
+  box-shadow:0 8px 16px rgba(0,0,0,0.1);
+  z-index:1;
+  margin-top:8px;
+  border-radius:4px;
+  padding:8px 0;
+}
+/* Dropdown links */
+.site-nav .dropdown-content a{
+  color:var(--muted);
+  padding:12px 16px;
+  text-decoration:none;
+  display:block;
+  font-family: var(--display-font);
+  letter-spacing: 0.08em;
+  font-size:14px;
+  transition:background 0.2s ease;
+}
+/* Change color on hover */
+.site-nav .dropdown-content a:hover{
+  background:rgba(0,0,0,0.04);
+}
+/* Show the dropdown menu on hover */
+.site-nav .dropdown:hover .dropdown-content{
+  display:block;
 }
 /* Tooltip styles for desktop hover effect */
 @media (min-width: 641px){
@@ -131,6 +179,7 @@ body{
   color:var(--muted);
   max-width:60ch;
   margin:12px auto 0;
+  font-size:14px; /* decreased by 10% from default 16px */
 }
 /* Section headings use Major Mono Display */
 .home h3, .about h3, .contact h3{
@@ -164,7 +213,7 @@ body{
 @media (max-width:640px){ 
   .gallery{column-count:1;} 
   .hero{padding:28px 0;}
-  .logo{width:180px;}
+  .logo{width:225px;} /* increased by 25% from 180px */
   .site-title{font-size:14px;}
   .mobile-menu-btn{display:block;}
   .site-nav{
@@ -185,6 +234,24 @@ body{
   }
   .site-nav.active{right:0;}
   .site-nav a{font-size:18px;}
+  /* Mobile dropdown styles */
+  .site-nav .dropdown{
+    width:100%;
+  }
+  .site-nav .dropdown-content{
+    position:static;
+    box-shadow:none;
+    margin-top:0;
+    padding-left:16px;
+    background:transparent;
+  }
+  .site-nav .dropdown-content a{
+    font-size:16px;
+  }
+  /* Show dropdown on click in mobile (will need JS for toggle) */
+  .site-nav .dropdown.active .dropdown-content{
+    display:block;
+  }
   .mobile-menu-overlay{
     display:none;
     position:fixed;

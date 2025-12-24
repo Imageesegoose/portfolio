@@ -24,10 +24,46 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
     
-    // Close menu when clicking nav links
+    // Close menu when clicking nav links (except dropdown parent)
     const navLinks = nav.querySelectorAll('a');
     navLinks.forEach(link => {
+      // Don't close menu if it's the dropdown parent link
+      if (link.parentElement.classList.contains('dropdown') && 
+          link.getAttribute('onclick') === 'return false;') {
+        return;
+      }
       link.addEventListener('click', closeMenu);
+    });
+    
+    // Mobile dropdown toggle
+    const dropdowns = nav.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      const parentLink = dropdown.querySelector('a[onclick="return false;"]');
+      if (parentLink && window.innerWidth <= 640) {
+        parentLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+    
+    // Handle window resize to reinitialize dropdown behavior
+    let resizeDropdownTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeDropdownTimer);
+      resizeDropdownTimer = setTimeout(function() {
+        if (window.innerWidth <= 640) {
+          dropdowns.forEach(dropdown => {
+            const parentLink = dropdown.querySelector('a[onclick="return false;"]');
+            if (parentLink) {
+              parentLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+              });
+            }
+          });
+        }
+      }, 250);
     });
   })();
 
