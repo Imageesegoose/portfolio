@@ -42,7 +42,7 @@
   // If a site lightbox already initializes, do nothing else.
   if (window.__site_lightbox_installed) return;
 
-  // Lightweight lightbox for anchors with class "gallery-item"
+  // Main site lightbox implementation for anchors with class "gallery-item", reused via the exposed handler
   function createLightbox() {
     const lb = document.createElement('div');
     lb.id = 'simple-lightbox';
