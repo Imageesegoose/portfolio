@@ -3,6 +3,7 @@
 
   // Mobile menu toggle
   (function initMobileMenu() {
+    const MOBILE_BREAKPOINT = 640; // Match CSS media query breakpoint
     const menuBtn = document.getElementById('mobile-menu-btn');
     const nav = document.getElementById('site-nav');
     const overlay = document.getElementById('mobile-menu-overlay');
@@ -44,7 +45,7 @@
         parentLink.addEventListener('click', function(e) {
           e.preventDefault();
           // Only toggle on mobile (CSS will handle showing on desktop via hover)
-          if (window.innerWidth <= 640) {
+          if (window.innerWidth <= MOBILE_BREAKPOINT) {
             dropdown.classList.toggle('active');
           }
         });
