@@ -3,6 +3,7 @@
 
   // Mobile menu toggle
   (function initMobileMenu() {
+    const MOBILE_BREAKPOINT = 640; // Match CSS media query breakpoint
     const menuBtn = document.getElementById('mobile-menu-btn');
     const nav = document.getElementById('site-nav');
     const overlay = document.getElementById('mobile-menu-overlay');
@@ -24,10 +25,31 @@
     menuBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
     
-    // Close menu when clicking nav links
+    // Close menu when clicking nav links (except dropdown parent)
     const navLinks = nav.querySelectorAll('a');
     navLinks.forEach(link => {
-      link.addEventListener('click', closeMenu);
+      // Don't close menu if it's the dropdown parent link
+      const isDropdownParent = link.parentElement.classList.contains('dropdown') && 
+                               link.nextElementSibling && 
+                               link.nextElementSibling.classList.contains('dropdown-content');
+      if (!isDropdownParent) {
+        link.addEventListener('click', closeMenu);
+      }
+    });
+    
+    // Mobile dropdown toggle - always attach handlers, behavior controlled by CSS
+    const dropdowns = nav.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      const parentLink = dropdown.querySelector('a[href="#"]');
+      if (parentLink) {
+        parentLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Only toggle on mobile (CSS will handle showing on desktop via hover)
+          if (window.innerWidth <= MOBILE_BREAKPOINT) {
+            dropdown.classList.toggle('active');
+          }
+        });
+      }
     });
   })();
 
