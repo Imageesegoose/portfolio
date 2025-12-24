@@ -69,9 +69,15 @@
   }
 
   // Desktop-only navigation tooltips
+  var MOBILE_BREAKPOINT = 640;
+  var tooltipsInitialized = false;
+
   function initNavTooltips() {
     // Only add tooltips on desktop (min-width: 641px)
-    if (window.innerWidth <= 640) return;
+    if (window.innerWidth <= MOBILE_BREAKPOINT) return;
+
+    // Avoid duplicate initialization
+    if (tooltipsInitialized) return;
 
     var navLinks = document.querySelectorAll('.site-nav a');
     
@@ -84,7 +90,7 @@
 
       // Show tooltip on mouseenter
       link.addEventListener('mouseenter', function() {
-        if (window.innerWidth > 640) {
+        if (window.innerWidth > MOBILE_BREAKPOINT) {
           tooltip.classList.add('show');
         }
       });
@@ -94,6 +100,16 @@
         tooltip.classList.remove('show');
       });
     });
+
+    tooltipsInitialized = true;
+  }
+
+  function removeNavTooltips() {
+    var existingTooltips = document.querySelectorAll('.nav-tooltip');
+    existingTooltips.forEach(function(tooltip) {
+      tooltip.remove();
+    });
+    tooltipsInitialized = false;
   }
 
   // Initialize tooltips after DOM is ready
@@ -108,12 +124,12 @@
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      // Remove existing tooltips if switching to mobile
-      if (window.innerWidth <= 640) {
-        var existingTooltips = document.querySelectorAll('.nav-tooltip');
-        existingTooltips.forEach(function(tooltip) {
-          tooltip.remove();
-        });
+      if (window.innerWidth <= MOBILE_BREAKPOINT) {
+        // Remove tooltips when switching to mobile
+        removeNavTooltips();
+      } else if (!tooltipsInitialized) {
+        // Re-add tooltips when switching back to desktop
+        initNavTooltips();
       }
     }, 250);
   });
