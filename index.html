@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>cordacreative</title>
-  <meta name="description" content="Home of an art director with emphasis on photography." />
+  <meta name="description" content="Home of an art director with emphasis on photography showcasing selected work, adventure galleries, and creative direction." />
   <!-- Google Font: Major Mono Display (loaded before CSS) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,12 @@
   <!-- site CSS -->
   <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    /* Portfolio gallery - enhanced masonry grid (matching Adventure page) */
-    .portfolio .gallery {
+    /* Home gallery - enhanced masonry grid (matching Adventure page) */
+    .home .gallery {
       column-gap: var(--gap);
       column-count: 3;
     }
-    .portfolio .gallery-item {
+    .home .gallery-item {
       display: inline-block;
       width: 100%;
       margin: 0 0 var(--gap);
@@ -27,7 +27,7 @@
       break-inside: avoid;
       position: relative;
     }
-    .portfolio .gallery-item img {
+    .home .gallery-item img {
       width: 100%;
       height: auto;
       display: block;
@@ -35,22 +35,22 @@
       box-shadow: 0 6px 18px rgba(10,10,10,0.06);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .portfolio .gallery-item:hover img,
-    .portfolio .gallery-item:focus img {
+    .home .gallery-item:hover img,
+    .home .gallery-item:focus img {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(10,10,10,0.12);
     }
-    .portfolio .gallery-item.loading img {
+    .home .gallery-item.loading img {
       opacity: 0.6;
     }
-    .portfolio .gallery-item.error {
+    .home .gallery-item.error {
       display: none;
     }
     @media (max-width:1000px) { 
-      .portfolio .gallery { column-count: 2; } 
+      .home .gallery { column-count: 2; } 
     }
     @media (max-width:640px) { 
-      .portfolio .gallery { column-count: 1; } 
+      .home .gallery { column-count: 1; } 
     }
   </style>
 </head>
@@ -66,7 +66,7 @@
         <span>☰</span>
       </button>
       <nav class="site-nav" id="site-nav">
-        <a href="index.html#portfolio">Home</a>
+        <a href="index.html#home">Home</a>
         <a href="adventure.html">Adventure</a>
         <a href="about.html">About</a>
         <a href="index.html#contact">Contact</a>
@@ -81,7 +81,7 @@
       <p class="lead">Minimal, editorial-driven imagery and concept-led creative direction.</p>
     </section>
 
-    <section id="portfolio" class="wrap portfolio">
+    <section id="home" class="wrap home">
       <h3>Selected Work</h3>
       <div class="gallery" id="gallery" aria-label="Gallery of selected work">
         <!-- Images will be dynamically loaded here -->

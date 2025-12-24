@@ -98,7 +98,7 @@ body{
   margin:12px auto 0;
 }
 /* Section headings use Major Mono Display */
-.portfolio h3, .about h3, .contact h3{
+.home h3, .about h3, .contact h3{
   margin-top:6px;
   margin-bottom:12px;
   font-size:20px;
