@@ -1,103 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventure Gallery</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f0f0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            max-width: 1200px;
-            width: 100%;
-            padding: 1rem;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .gallery img:hover,
-        .gallery img:focus {
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-            width: 100%;
-            margin-top: auto;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adventure Gallery</title>
+  <meta name="description" content="Adventure photography gallery showcasing travel and exploration." />
+  <!-- Google Font: Major Mono Display (loaded before CSS) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <!-- site CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Adventure-specific styles for masonry grid */
+    .adventure-gallery {
+      column-gap: var(--gap);
+      column-count: 3;
+    }
+    .adventure-gallery .gallery-item {
+      display: inline-block;
+      width: 100%;
+      margin: 0 0 var(--gap);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      break-inside: avoid;
+      position: relative;
+    }
+    .adventure-gallery .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .adventure-gallery .gallery-item:hover img,
+    .adventure-gallery .gallery-item:focus img {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(10,10,10,0.12);
+    }
+    .adventure-gallery .gallery-item.loading img {
+      opacity: 0.6;
+    }
+    .adventure-gallery .gallery-item.error {
+      display: none;
+    }
+    @media (max-width:1000px) { 
+      .adventure-gallery { column-count: 2; } 
+    }
+    @media (max-width:640px) { 
+      .adventure-gallery { column-count: 1; } 
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>Adventure Gallery</h1>
-    </header>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.svg" alt="Logo" class="logo">
+        <span class="site-title">Your Name</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html#portfolio">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-        <section class="gallery" aria-label="Gallery of adventure images">
-            <!-- Dynamically updated list of images -->
-            <script>
-                const imageCount = 28;
-                const galleryContainer = document.querySelector('.gallery');
+  <main>
+    <section class="hero wrap">
+      <h2>Adventure Gallery</h2>
+      <p class="lead">A collection of moments captured while exploring the world.</p>
+    </section>
 
-                for (let i = 1; i <= imageCount; i++) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = `adventure/image${i}.jpg`;
-                    imgElement.alt = `Adventure Image ${i}`;
-                    imgElement.tabIndex = 0;
-                    galleryContainer.appendChild(imgElement);
-                }
-            </script>
-        </section>
-    </main>
+    <section class="wrap">
+      <div class="adventure-gallery" id="adventure-gallery" aria-label="Gallery of adventure images">
+        <!-- Images will be dynamically loaded here -->
+      </div>
+    </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Adventure Gallery</p>
-    </footer>
+  <footer class="site-footer wrap">
+    <small>© <span id="year"></span> Your Name</small>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function() {
+      'use strict';
+      
+      const galleryContainer = document.getElementById('adventure-gallery');
+      const imageCount = 28;
+      const imagePaths = [];
+      
+      // Build list of adventure image paths with proper extensions
+      const imageExtensions = [
+        { num: 1, ext: 'jpeg' },
+        { num: 2, ext: 'jpg' },
+        { num: 3, ext: 'JPG' },
+        { num: 4, ext: 'jpg' },
+        { num: 5, ext: 'JPG' },
+        { num: 6, ext: 'JPG' },
+        { num: 7, ext: 'JPG' },
+        { num: 8, ext: 'JPG' },
+        { num: 9, ext: 'JPG' },
+        { num: 10, ext: 'JPG' },
+        { num: 11, ext: 'JPG' },
+        { num: 12, ext: 'jpg' },
+        { num: 13, ext: 'JPG' },
+        { num: 14, ext: 'jpg' },
+        { num: 15, ext: 'jpg' },
+        { num: 16, ext: 'jpg' },
+        { num: 17, ext: 'JPG' },
+        { num: 18, ext: 'JPG' },
+        { num: 19, ext: 'JPG' },
+        { num: 20, ext: 'JPG' },
+        { num: 21, ext: 'jpg' },
+        { num: 22, ext: 'JPG' },
+        { num: 23, ext: 'JPG' },
+        { num: 24, ext: 'jpg' },
+        { num: 25, ext: 'JPG' },
+        { num: 26, ext: 'JPG' },
+        { num: 27, ext: 'JPG' },
+        { num: 28, ext: 'jpg' }
+      ];
+      
+      // Create inline lightbox for dynamically loaded images
+      function createAdventureLightbox() {
+        if (window.__adventure_lightbox) return window.__adventure_lightbox;
+        
+        var lb = document.createElement('div');
+        lb.id = 'adventure-lightbox';
+        lb.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);z-index:9999;padding:24px;';
+        lb.innerHTML = '<button id="alb-close" aria-label="Close" style="position:absolute;right:18px;top:18px;font-size:36px;color:#fff;background:none;border:0;cursor:pointer;padding:12px;">×</button><img id="alb-img" style="max-width:90%;max-height:80%;object-fit:contain;border-radius:4px;box-shadow:0 8px 30px rgba(0,0,0,0.6);"><div id="alb-caption" style="color:#eee;margin-top:12px;text-align:center;"></div>';
+        document.body.appendChild(lb);
+        
+        var img = lb.querySelector('#alb-img');
+        var caption = lb.querySelector('#alb-caption');
+        var closeBtn = lb.querySelector('#alb-close');
+        
+        function open(src, text) {
+          img.src = src;
+          caption.textContent = text || '';
+          lb.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+        
+        function close() {
+          lb.style.display = 'none';
+          img.src = '';
+          document.body.style.overflow = '';
+        }
+        
+        closeBtn.addEventListener('click', close);
+        lb.addEventListener('click', function(e) {
+          if (e.target === lb || e.target === closeBtn) close();
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && lb.style.display === 'flex') close();
+        });
+        
+        window.__adventure_lightbox = { open: open, close: close };
+        return window.__adventure_lightbox;
+      }
+      
+      var lightbox = createAdventureLightbox();
+      
+      // Create gallery items
+      imageExtensions.forEach(function(imgInfo) {
+        const numStr = String(imgInfo.num).padStart(5, '0');
+        const imgPath = 'assets/images/adventure/adventure-' + numStr + '.' + imgInfo.ext;
+        
+        const anchor = document.createElement('a');
+        anchor.href = imgPath;
+        anchor.className = 'gallery-item loading';
+        anchor.setAttribute('data-caption', 'Adventure ' + imgInfo.num);
+        
+        const img = document.createElement('img');
+        img.src = imgPath;
+        img.alt = 'Adventure ' + imgInfo.num;
+        img.loading = 'lazy';
+        
+        // Handle successful image load
+        img.addEventListener('load', function() {
+          anchor.classList.remove('loading');
+        });
+        
+        // Handle image load errors with fallback
+        img.addEventListener('error', function() {
+          anchor.classList.add('error');
+          console.warn('Failed to load image:', imgPath);
+        });
+        
+        // Attach lightbox click handler
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          var href = anchor.getAttribute('href');
+          var cap = anchor.getAttribute('data-caption') || '';
+          lightbox.open(href, cap);
+        });
+        
+        anchor.appendChild(img);
+        galleryContainer.appendChild(anchor);
+      });
+    })();
+  </script>
 </body>
-
 </html>
