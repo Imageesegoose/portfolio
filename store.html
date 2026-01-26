@@ -70,7 +70,7 @@
     (function() {
       'use strict';
       
-      const PAYPAL_EMAIL = 'placeholder@example.com'; // Replace with actual PayPal email
+      const PAYPAL_EMAIL = 'placeholder@example.com'; // TODO: Replace with actual PayPal business email before deployment
       const productsContainer = document.getElementById('products-container');
       
       // Fetch and display products
@@ -107,6 +107,13 @@
         img.alt = product.name;
         img.className = 'product-image';
         img.loading = 'lazy';
+        
+        // Add error handler for failed image loads
+        img.addEventListener('error', function() {
+          // Use a fallback color background if image fails to load
+          this.style.background = 'rgba(0, 0, 0, 0.1)';
+          this.alt = product.name + ' (Image not available)';
+        });
         
         // Product info container
         const info = document.createElement('div');
