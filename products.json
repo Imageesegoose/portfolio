@@ -1,44 +1,44 @@
 [
   {
     "id": "001",
-    "name": "Vintage Camera Print",
-    "description": "Limited edition print of vintage camera collection",
-    "price": "45.00",
-    "image": "assets/images/work/work-00001.jpeg"
+    "name": "Product Name 1",
+    "description": "This is a placeholder description for product one.",
+    "price": "25.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23cccccc'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   },
   {
     "id": "002",
-    "name": "Mountain Landscape",
-    "description": "Stunning mountain vista captured at golden hour",
-    "price": "65.00",
-    "image": "assets/images/work/work-00002.jpg"
+    "name": "Product Name 2",
+    "description": "This is a placeholder description for product two.",
+    "price": "35.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23dddddd'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   },
   {
     "id": "003",
-    "name": "Urban Architecture",
-    "description": "Modern architectural photography print",
-    "price": "55.00",
-    "image": "assets/images/work/work-00003.jpeg"
+    "name": "Product Name 3",
+    "description": "This is a placeholder description for product three.",
+    "price": "30.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23cccccc'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   },
   {
     "id": "004",
-    "name": "Portrait Series",
-    "description": "Fine art portrait print from exclusive series",
-    "price": "75.00",
-    "image": "assets/images/work/work-00004.JPG"
+    "name": "Product Name 4",
+    "description": "This is a placeholder description for product four.",
+    "price": "40.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23dddddd'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   },
   {
     "id": "005",
-    "name": "Vintage Film Camera",
-    "description": "Restored vintage 35mm camera from 1970s",
-    "price": "150.00",
-    "image": "assets/images/work/work-00005.JPG"
+    "name": "Product Name 5",
+    "description": "This is a placeholder description for product five.",
+    "price": "50.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23cccccc'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   },
   {
     "id": "006",
-    "name": "Abstract Light Study",
-    "description": "Abstract photography exploring light and shadow",
-    "price": "50.00",
-    "image": "assets/images/work/work-00006.JPG"
+    "name": "Product Name 6",
+    "description": "This is a placeholder description for product six.",
+    "price": "28.00",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23dddddd'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='%23666666' text-anchor='middle' dominant-baseline='middle'%3EPlaceholder Image%3C/text%3E%3C/svg%3E"
   }
 ]
